@@ -2,6 +2,7 @@ package com.gathin.tvhome;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -60,6 +61,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     /** Tiles per row and dock slots (res/values/config.xml, columns). Set in onCreate. */
     static int COLUMNS = 4;
     private static final long MINUTE_MS = 60_000L;
+    /** Grid cell width: the 4-column layout's (848dp row - 2 x 264dp sides) / 4. More columns widen the grid instead of squeezing it. */
+    private static final float CELL_DP = 80f;
+    /** Fire OS 7: Amazon's standalone Settings screen (category LEANBACK_SETTINGS). Back from it returns here. */
+    static final ComponentName FIRE_SETTINGS =
+            new ComponentName("com.amazon.tv.launcher", "com.amazon.tv.launcher.ui.MainSettingsActivity");
     private String liveTvPkg;
 
     private AppAdapter adapter;
@@ -136,6 +142,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         btnWifi = findViewById(R.id.btnWifi);
 
         grid = findViewById(R.id.grid);
+        // Side padding for COLUMNS cells of CELL_DP, set before the first layout: RecyclerView does not lay its rows out
+        // again for a padding change alone, so a later change left the dock squeezed until the next reload.
+        View row = (View) grid.getParent().getParent();   // the screen-wide column holding the top bar and the grid
+        int rowW = getResources().getDisplayMetrics().widthPixels - row.getPaddingLeft() - row.getPaddingRight();
+        int sidePad = Math.max(0, (rowW - (int) (COLUMNS * CELL_DP * density)) / 2);
+        grid.setPadding(sidePad, grid.getPaddingTop(), sidePad, grid.getPaddingBottom());
         // One span unit per cell of any dock size 1..COLUMNS: the dock row splits evenly, grid rows are COLUMNS wide.
         final int spans = lcmUpTo(COLUMNS);
         GridLayoutManager glm = new GridLayoutManager(this, spans);
@@ -160,8 +172,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             int h = b - t;
             int dockRow = (int) ((101 + 6 + 12) * density);   // item height plus DockDecoration offsets
             int want = Math.max(0, h - dockRow + (int) (8 * density));
-            if (grid.getPaddingTop() != want) {
-                grid.setPadding(grid.getPaddingLeft(), want, grid.getPaddingRight(), grid.getPaddingBottom());
+            int side = Math.max(0, ((r - l) - (int) (COLUMNS * CELL_DP * density)) / 2);   // 264dp with 4 columns
+            if (grid.getPaddingTop() != want || grid.getPaddingLeft() != side) {
+                grid.setPadding(side, want, side, grid.getPaddingBottom());
             }
         });
 
@@ -185,9 +198,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
         View btnInputs = findViewById(R.id.btnInputs);
         View btnSettings = findViewById(R.id.btnSettings);
+        // A Fire TV Stick has no HDMI/AV inputs: with no inputs and no Live TV app the pill could only say so.
+        if (!hasInputs()) btnInputs.setVisibility(View.GONE);
         btnInputs.setOnClickListener(v -> showInputs());
         btnWifi.setOnClickListener(v -> open(new Intent(Settings.ACTION_WIFI_SETTINGS)));
-        btnSettings.setOnClickListener(v -> open(new Intent(Settings.ACTION_SETTINGS)));
+        btnSettings.setOnClickListener(v -> open(settingsIntent()));
         btnSettings.setOnLongClickListener(v -> {
             showHomeScreenMenu(v);
             return true;
@@ -202,7 +217,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 showHomeScreenMenu(v);
                 return true;
             }
-            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && v.getId() == R.id.btnInputs) return true;
+            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT && (v.getId() == R.id.btnInputs
+                    || (v.getId() == R.id.btnWifi && btnInputs.getVisibility() != View.VISIBLE))) return true;
             return keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && v.getId() == R.id.btnSettings;
         };
         btnInputs.setOnKeyListener(pillKeys);
@@ -639,8 +655,27 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         try {
             startActivity(i);
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "Not available on this TV", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /** Fire OS 7 shows ACTION_SETTINGS as a tab of Amazon's home screen, where Back and Home leave you on Amazon's
+     *  home. Its standalone Settings screen has the same grid and returns here on Back. Elsewhere: the usual Settings. */
+    private Intent settingsIntent() {
+        Intent fire = new Intent(Intent.ACTION_MAIN).setComponent(FIRE_SETTINGS);
+        if (getPackageManager().resolveActivity(fire, 0) != null) return fire;
+        return new Intent(Settings.ACTION_SETTINGS);
+    }
+
+    /** True when the Inputs menu has something to list: a passthrough input (HDMI, AV) or the Live TV app. */
+    private boolean hasInputs() {
+        if (!liveTvPkg.isEmpty() && getPackageManager().getLeanbackLaunchIntentForPackage(liveTvPkg) != null) return true;
+        TvInputManager tim = (TvInputManager) getSystemService(TV_INPUT_SERVICE);
+        if (tim == null) return false;
+        for (TvInputInfo info : tim.getTvInputList()) {
+            if (info.isPassthroughInput()) return true;
+        }
+        return false;
     }
 
     /** Dropdown menu under the Inputs pill: HDMI ports (with connection state), AV and Live TV. */

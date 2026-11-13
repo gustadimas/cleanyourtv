@@ -23,7 +23,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            // Sideloaded over ADB, never published: sign with the debug key so assembleRelease installs.
+            signingConfig signingConfigs.debug
         }
+    }
+
+    lint {
+        // Sideloaded over ADB, never on Google Play: Play's target-API rule (fatal in release builds) does not apply.
+        disable 'ExpiredTargetSdkVersion'
     }
 
     compileOptions {

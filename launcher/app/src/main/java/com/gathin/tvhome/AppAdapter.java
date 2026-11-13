@@ -3,6 +3,7 @@ package com.gathin.tvhome;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
@@ -10,7 +11,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Outline;
 import android.graphics.Rect;
+import android.graphics.drawable.AdaptiveIconDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -119,13 +123,14 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
             ComponentName mainComponent = main != null ? main.getComponent() : null;
             if (mainComponent != null && !mainComponent.getClassName().equals(ri.activityInfo.name)) continue;
             if (!seen.add(pkg)) continue;
-            Drawable icon = ri.loadIcon(pm);
             String label = String.valueOf(ri.loadLabel(pm));
             String squareName = DOCK_ICONS.get(pkg);
             int square = squareName == null ? 0
                     : ctx.getResources().getIdentifier(squareName, "drawable", ctx.getPackageName());
-            fresh.add(new Entry(label, new ComponentName(pkg, ri.activityInfo.name),
-                    square != 0 ? ctx.getDrawable(square) : null, icon));
+            // Without drawn dock art, the app's own icon fills the tile when it is a full square (see fullBleedIcon).
+            Drawable art = square != 0 ? ctx.getDrawable(square) : fullBleedIcon(pm, ri.activityInfo);
+            Drawable icon = art != null ? null : ri.loadIcon(pm);
+            fresh.add(new Entry(label, new ComponentName(pkg, ri.activityInfo.name), art, icon));
         }
         Collections.sort(fresh, (a, b) -> {
             int fa = pinned.indexOf(a.pkg), fb = pinned.indexOf(b.pkg);
@@ -142,6 +147,79 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
         while (docked < items.size() && pinned.contains(items.get(docked).pkg)) docked++;
         dockCount = Math.min(docked, maxDock);
         notifyDataSetChanged();
+    }
+
+    // ---- full-bleed icons ------------------------------------------------------------------------
+
+    /** Largest scale a tile is drawn at: the focused dock icon (MainActivity.DOCK_MAGNIFY). */
+    private static final float MAX_TILE_SCALE = 1.30f;
+    /** Full-bleed art per app version (null: the app keeps the small icon), so returning Home rebuilds nothing. */
+    private static final Map<String, Drawable.ConstantState> FULL_BLEED = new HashMap<>();
+
+    /**
+     * The app's own icon, at full resolution, filling the whole tile like drawn dock art: when the icon is a full
+     * square (opaque near its corners; the tile's outline rounds it) or an adaptive icon (its layers drawn without
+     * the system mask). Null for round or inset icons, which stay small on the graphite tile.
+     */
+    private Drawable fullBleedIcon(PackageManager pm, ActivityInfo ai) {
+        long updated = 0;
+        try {
+            updated = pm.getPackageInfo(ai.packageName, 0).lastUpdateTime;
+        } catch (PackageManager.NameNotFoundException ignored) {
+            // Removed meanwhile: the next reload drops it.
+        }
+        String key = ai.packageName + "/" + ai.name + "@" + updated;
+        if (FULL_BLEED.containsKey(key)) {
+            Drawable.ConstantState cs = FULL_BLEED.get(key);
+            return cs == null ? null : cs.newDrawable(ctx.getResources());
+        }
+        Drawable art = null;
+        int res = ai.getIconResource();
+        if (res != 0) {
+            try {
+                Drawable d = pm.getResourcesForApplication(ai.applicationInfo)
+                        .getDrawableForDensity(res, DisplayMetrics.DENSITY_XXXHIGH, null);
+                if (d != null) art = renderFullBleed(d);
+            } catch (PackageManager.NameNotFoundException | RuntimeException ignored) {
+                // Unreadable icon: keep the small one.
+            }
+        }
+        FULL_BLEED.put(key, art == null ? null : art.getConstantState());
+        return art;
+    }
+
+    private Drawable renderFullBleed(Drawable d) {
+        int n = Math.round(56 * MAX_TILE_SCALE * ctx.getResources().getDisplayMetrics().density);
+        Bitmap bmp = Bitmap.createBitmap(n, n, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmp);
+        if (d instanceof AdaptiveIconDrawable) {
+            // Layers are 108dp with the visible icon in the middle 72dp: draw them a quarter larger on each side.
+            int e = n / 4;
+            AdaptiveIconDrawable a = (AdaptiveIconDrawable) d;
+            for (Drawable layer : new Drawable[]{a.getBackground(), a.getForeground()}) {
+                if (layer == null) continue;
+                layer.setBounds(-e, -e, n + e, n + e);
+                layer.draw(c);
+            }
+        } else {
+            d.setBounds(0, 0, n, n);
+            d.draw(c);
+            if (!opaqueCorners(bmp)) {
+                bmp.recycle();
+                return null;
+            }
+        }
+        return new BitmapDrawable(ctx.getResources(), bmp);
+    }
+
+    /** True when the icon fills its square: the pixels 10% in from each corner are opaque (rounded squares pass). */
+    private static boolean opaqueCorners(Bitmap b) {
+        int n = b.getWidth(), m = Math.max(1, n / 10);
+        int[][] points = {{m, m}, {n - 1 - m, m}, {m, n - 1 - m}, {n - 1 - m, n - 1 - m}};
+        for (int[] p : points) {
+            if (Color.alpha(b.getPixel(p[0], p[1])) < 250) return false;
+        }
+        return true;
     }
 
     // ---- dock editing ----------------------------------------------------------------------------
@@ -236,7 +314,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.Holder> {
         try {
             ctx.startActivity(i);
         } catch (Exception ex) {
-            Toast.makeText(ctx, "Can't open " + e.label, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.cant_open, e.label), Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -36,6 +36,7 @@ public class HomeRedirectService extends AccessibilityService {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable redirect = this::openLauncher;
     private long settingsSeenAt = -SETTINGS_GRACE_MS;
+    private long standaloneSettingsAt = -SETTINGS_GRACE_MS;
 
     @Override
     protected void onServiceConnected() {
@@ -52,7 +53,14 @@ public class HomeRedirectService extends AccessibilityService {
         handler.removeCallbacks(redirect);
         if (!AMAZON_LAUNCHER.contentEquals(pkg) || !cls.toString().contains(AMAZON_HOME)) return;
         if (now - settingsSeenAt < SETTINGS_GRACE_MS) {
-            Log.i(TAG, "home screen on the way into Settings: left alone");
+            // Fire OS 7: this "flash" is Settings itself, a tab of Amazon's home screen, and Back from it leaves you on
+            // Amazon's home (Home does not get you out either). Show the standalone Settings screen over it instead.
+            if (now - standaloneSettingsAt >= SETTINGS_GRACE_MS && openStandaloneSettings()) {
+                standaloneSettingsAt = now;
+                Log.i(TAG, "home screen on the way into Settings: standalone Settings opened over it");
+            } else {
+                Log.i(TAG, "home screen on the way into Settings: left alone");
+            }
             return;
         }
         Log.i(TAG, "home screen: opening launcher");
@@ -61,6 +69,19 @@ public class HomeRedirectService extends AccessibilityService {
 
     @Override
     public void onInterrupt() {
+    }
+
+    /** False when this Fire OS has no standalone Settings screen (then Amazon's own Settings tab stays). */
+    private boolean openStandaloneSettings() {
+        Intent i = new Intent(Intent.ACTION_MAIN).setComponent(MainActivity.FIRE_SETTINGS)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        if (getPackageManager().resolveActivity(i, 0) == null) return false;
+        try {
+            startActivity(i);
+            return true;
+        } catch (RuntimeException e) {
+            return false;
+        }
     }
 
     private void openLauncher() {
