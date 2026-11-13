@@ -1,0 +1,60 @@
+# Fire TV Stick Lite (AFTSS, sheldon), Fire OS 7.7.1.7 (PS7717.5746N), Android 9 (SDK 28), 1 GB de RAM - 10/11/2026
+# Tudo o que foi DESATIVADO para o usuário 0 (nunca desinstalado). Junta os lotes 1 a 4.
+# Desfazer tudo: meu-firestick\restaurar.ps1 -Tv <ip>     Um app só: adb -s <ip>:5555 shell pm enable <pacote>
+#
+# Mantidos por escolha: Alexa completa (voz, alarmes, música, multi-room, dicas, casa inteligente/Matter,
+# configuração de outros aparelhos Amazon), app Fire TV no celular, espelhamento (Miracast), transmitir do
+# celular (DIAL/fling), atualizações do Fire OS, YouTube, Prime Video, Stremio, Crunchyroll, Twitch, Kick,
+# VLC, Aptoide, Downloader. O launcher da Amazon (com.amazon.tv.launcher) fica ativo: ele abriga as Configurações.
+# Já vinha desativado de fábrica: com.android.nfc.
+
+# Lote 1 - telemetria, métricas e coleta de dados (Fire TV Stick Lite AFTSS / Fire OS 7.7.1.7 / Android 9)
+# Base: cleanyourtv/examples/amazon-fire-tv-stick-lite-2020 (mesmo modelo e build, testada com reboot).
+com.amazon.client.metrics.api            # métricas do Fire OS
+com.amazon.neo.minerva                   # coleta de métricas (Minerva)
+com.amazon.neo.minerva.logcat            # envio de logs (Minerva)
+com.amazon.tv.fw.metrics                 # métricas do sistema
+com.amazon.wirelessmetrics.service       # métricas de Wi-Fi
+com.amazon.perfcollection                # coleta de desempenho
+com.amazon.perfc                         # coleta de desempenho
+com.amazon.dp.logger                     # logs do aparelho
+com.amazon.ceviche                       # pipelines de coleta de dados
+com.amazon.tv.developer.dataservice      # dados de personalização para apps de terceiros
+com.amazon.livedeviceservice             # serviço de telemetria "live device"
+com.amazon.privacypassservice            # tokens "privacy pass"
+com.amazon.wifilocker                    # envia as senhas de Wi-Fi para a Amazon
+com.amazon.tv.acr                        # reconhecimento automático de conteúdo (ACR)
+
+# Lote 2 - anúncios, recomendações, promoções e compras
+com.amazon.kso.blackbird                 # sincroniza e leiloa os anúncios da tela inicial
+com.amazon.sneakpeek                     # prévias patrocinadas "Sneak Peek"
+com.amazon.hybridadidservice             # ID de publicidade
+com.amazon.media.recommendations         # recomendações
+com.amazon.providers.contentsupport      # fornecedor de conteúdo promocional
+com.amazon.tv.easyupgrade                # promoções "atualize seu Fire TV"
+com.amazon.shoptv.client                 # Amazon Shopping na TV
+com.amazon.shoptv.firetv.client          # Amazon Shopping na TV
+com.amazon.hedwig                        # Fire TV Channels
+com.amazon.tv.livetv                     # aba "Ao vivo" e guia (stick sem sintonizador nem HDMI de entrada)
+com.amazon.franktvinput                  # entrada de TV ao vivo que alimenta a aba "Ao vivo"
+com.amazon.gamehub                       # central de jogos / cards do Luna
+com.amazon.systemnotices                 # avisos e pop-ups do sistema
+com.amazon.tv.releasenotes               # "novidades" depois de atualizar
+com.amazon.uxnotification                # pop-ups de notificação
+
+# Lote 3 - apps da Amazon que você não usa, tutoriais e ajudantes
+com.amazon.tahoe                         # Amazon Kids
+com.amazon.bueller.music                 # Amazon Music
+com.amazon.bueller.photos                # Amazon Photos
+com.amazon.cloud9                        # navegador Silk
+com.amazon.tv.website_launcher           # atalhos de sites (abrem no Silk)
+com.amazon.tmm.tutorial                  # tutorial do controle
+com.amazon.storm.lightning.tutorial      # tutorial do app de controle (o app Fire TV continua funcionando)
+com.amazon.naatyam                       # serviço da Amazon sem tela (recebe push e eventos da Appstore); desativado nas listas testadas deste modelo
+
+# Lote 4 - streaming que você não usa (escolha sua)
+com.netflix.ninja                        # Netflix
+com.disney.disneyplus                    # Disney+
+com.oneplaybuilder.ibopro                # IBO Pro (IPTV)
+com.amazon.minitv.android.app            # Amazon miniTV (só Índia)
+

@@ -1,0 +1,16 @@
+# Lote 1 - telemetria, métricas e coleta de dados (Fire TV Stick Lite AFTSS / Fire OS 7.7.1.7 / Android 9)
+# Base: cleanyourtv/examples/amazon-fire-tv-stick-lite-2020 (mesmo modelo e build, testada com reboot).
+com.amazon.client.metrics.api            # métricas do Fire OS
+com.amazon.neo.minerva                   # coleta de métricas (Minerva)
+com.amazon.neo.minerva.logcat            # envio de logs (Minerva)
+com.amazon.tv.fw.metrics                 # métricas do sistema
+com.amazon.wirelessmetrics.service       # métricas de Wi-Fi
+com.amazon.perfcollection                # coleta de desempenho
+com.amazon.perfc                         # coleta de desempenho
+com.amazon.dp.logger                     # logs do aparelho
+com.amazon.ceviche                       # pipelines de coleta de dados
+com.amazon.tv.developer.dataservice      # dados de personalização para apps de terceiros
+com.amazon.livedeviceservice             # serviço de telemetria "live device"
+com.amazon.privacypassservice            # tokens "privacy pass"
+com.amazon.wifilocker                    # envia as senhas de Wi-Fi para a Amazon
+com.amazon.tv.acr                        # reconhecimento automático de conteúdo (ACR)

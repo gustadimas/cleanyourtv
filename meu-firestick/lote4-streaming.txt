@@ -1,0 +1,5 @@
+# Lote 4 - streaming que você não usa (escolha sua)
+com.netflix.ninja                        # Netflix
+com.disney.disneyplus                    # Disney+
+com.oneplaybuilder.ibopro                # IBO Pro (IPTV)
+com.amazon.minitv.android.app            # Amazon miniTV (só Índia)

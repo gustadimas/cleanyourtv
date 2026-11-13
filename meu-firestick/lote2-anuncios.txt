@@ -1,0 +1,16 @@
+# Lote 2 - anúncios, recomendações, promoções e compras
+com.amazon.kso.blackbird                 # sincroniza e leiloa os anúncios da tela inicial
+com.amazon.sneakpeek                     # prévias patrocinadas "Sneak Peek"
+com.amazon.hybridadidservice             # ID de publicidade
+com.amazon.media.recommendations         # recomendações
+com.amazon.providers.contentsupport      # fornecedor de conteúdo promocional
+com.amazon.tv.easyupgrade                # promoções "atualize seu Fire TV"
+com.amazon.shoptv.client                 # Amazon Shopping na TV
+com.amazon.shoptv.firetv.client          # Amazon Shopping na TV
+com.amazon.hedwig                        # Fire TV Channels
+com.amazon.tv.livetv                     # aba "Ao vivo" e guia (stick sem sintonizador nem HDMI de entrada)
+com.amazon.franktvinput                  # entrada de TV ao vivo que alimenta a aba "Ao vivo"
+com.amazon.gamehub                       # central de jogos / cards do Luna
+com.amazon.systemnotices                 # avisos e pop-ups do sistema
+com.amazon.tv.releasenotes               # "novidades" depois de atualizar
+com.amazon.uxnotification                # pop-ups de notificação

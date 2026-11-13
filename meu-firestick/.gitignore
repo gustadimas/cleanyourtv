@@ -1,0 +1,9 @@
+# Fica só no PC: as imagens do tema zumbi (screenshots da Steam, "uso pessoal, não redistribuir",
+# veja tema-zumbi/fontes.txt), a prévia HTML que as carrega e o log da última compilação.
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.zip
+tema-zumbi/previa.html
+compilacao.log

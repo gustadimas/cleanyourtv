@@ -21,3 +21,5 @@ launcher/app/src/main/res/drawable-nodpi/dock_prime.png
 launcher/app/src/main/res/drawable-nodpi/dock_airplay.png
 tools/assets/
 screenshots/
+# The Cowork bridge (bridge.ps1, the adb shim and the files in transit) stays on this PC
+work/

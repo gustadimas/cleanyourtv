@@ -1,0 +1,9 @@
+# Lote 3 - apps da Amazon que você não usa, tutoriais e ajudantes
+com.amazon.tahoe                         # Amazon Kids
+com.amazon.bueller.music                 # Amazon Music
+com.amazon.bueller.photos                # Amazon Photos
+com.amazon.cloud9                        # navegador Silk
+com.amazon.tv.website_launcher           # atalhos de sites (abrem no Silk)
+com.amazon.tmm.tutorial                  # tutorial do controle
+com.amazon.storm.lightning.tutorial      # tutorial do app de controle (o app Fire TV continua funcionando)
+com.amazon.naatyam                       # serviço da Amazon sem tela (recebe push e eventos da Appstore); desativado nas listas testadas deste modelo
