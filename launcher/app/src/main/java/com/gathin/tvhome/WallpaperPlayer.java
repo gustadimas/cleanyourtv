@@ -113,6 +113,8 @@ final class WallpaperPlayer {
     private int motionX, motionY;
     /** When the last static or flicker ran: never two within 2 s, however fast the focus moves. */
     private long lastEffectAt;
+    /** focus_style: the one FocusFx change every picture uses, or -1 for the mix (mostly pushes). */
+    private final int fixedStyle;
 
     WallpaperPlayer(Context context, FrameLayout root, Config config) {
         this.root = root;
@@ -126,6 +128,10 @@ final class WallpaperPlayer {
         mixScenes = focusMode && focusConfig.optBoolean("focus_mix", true);
         boolean effects = focusMode && focusConfig.optBoolean("focus_effects", true);
         boolean withSound = focusMode && focusConfig.optBoolean("focus_sounds", false);
+        // focus_style: one change for every picture, idle approach included ("static" is the tape static, also
+        // "push", "fade", "flicker", "slow"), instead of the mix; focus_style_ms its length in real time (0: its own).
+        fixedStyle = focusMode ? styleNamed(focusConfig.optString("focus_style", "mix")) : -1;
+        long styleMs = focusMode ? Math.max(0L, Math.min(3000L, focusConfig.optLong("focus_style_ms", 0L))) : 0L;
         if (focusMode) readFocusExtras(focusConfig);
         interval = config.wallpaperRotationMinutes * 60_000L;
         bitmapConfig = config.wallpaperTrueColor ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
@@ -163,6 +169,7 @@ final class WallpaperPlayer {
                 root.addView(layer, 0, new FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 fx = new FocusFx(context, root, layer, image, effects, withSound, random);
+                fx.setStyleMs(styleMs);
             } else {
                 root.addView(image, 0, new FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -415,6 +422,7 @@ final class WallpaperPlayer {
 
     /** How a change looks: the approach's stages and the rare picture have their own; the rest mostly push. */
     private int styleFor(String wanted) {
+        if (fixedStyle >= 0) return fixedStyle;
         long now = SystemClock.uptimeMillis();
         int style;
         if (wanted.equals("perto1")) {
@@ -431,6 +439,25 @@ final class WallpaperPlayer {
         }
         if (style == FocusFx.STATIC || style == FocusFx.FLICKER) lastEffectAt = now;
         return style;
+    }
+
+    /** focus_style's names; anything else (and "mix") is the mix. */
+    private static int styleNamed(String name) {
+        switch (name == null ? "" : name.trim().toLowerCase(Locale.ROOT)) {
+            case "static":
+            case "tv":
+                return FocusFx.STATIC;
+            case "push":
+                return FocusFx.PUSH;
+            case "fade":
+                return FocusFx.FADE;
+            case "flicker":
+                return FocusFx.FLICKER;
+            case "slow":
+                return FocusFx.SLOW;
+            default:
+                return -1;
+        }
     }
 
     /** What goes with the picture just shown: the approach's overlays and alert line, or the rare picture's jolt. */

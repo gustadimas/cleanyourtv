@@ -54,6 +54,8 @@ final class FocusFx {
     private Runnable incomingDone;
     private ValueAnimator swapAnimator;
     private ObjectAnimator heart;
+    /** focus_style_ms: how long a change lasts in real time, 0 for each style's own length. */
+    private long styleMs;
 
     /** layer holds the bottom picture (WallpaperPlayer's) at index 0 of root; everything else goes just above it. */
     FocusFx(Context context, FrameLayout root, FrameLayout layer, ImageView bottom, boolean effects, boolean withSound,
@@ -107,6 +109,20 @@ final class FocusFx {
         if (withSound) loadSounds(context);
     }
 
+    void setStyleMs(long ms) {
+        styleMs = Math.max(0L, ms);
+    }
+
+    /**
+     * A change's animator length: focus_style_ms when set, divided by the system's animator duration scale (0.5 on
+     * this TV, which would halve it) so it lasts that long on screen; otherwise the style's own length.
+     */
+    private long length(long own) {
+        if (styleMs <= 0) return own;
+        float scale = ValueAnimator.getDurationScale();
+        return scale > 0f ? Math.round(styleMs / scale) : styleMs;
+    }
+
     private static FrameLayout.LayoutParams full() {
         return new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
@@ -153,10 +169,10 @@ final class FocusFx {
                 flicker();
                 break;
             case SLOW:
-                fade(1100);
+                fade(length(1100));
                 break;
             default:
-                fade(320);
+                fade(length(320));
                 break;
         }
     }
@@ -172,7 +188,7 @@ final class FocusFx {
         top.setScaleY(1.05f);
         top.setTranslationX(dx * 46 * dp);
         top.setTranslationY(dy * 30 * dp);
-        top.animate().alpha(1f).scaleX(1f).scaleY(1f).translationX(0f).translationY(0f).setDuration(460)
+        top.animate().alpha(1f).scaleX(1f).scaleY(1f).translationX(0f).translationY(0f).setDuration(length(460))
                 .setInterpolator(new DecelerateInterpolator(2f)).withEndAction(this::settle).start();
     }
 
@@ -183,11 +199,13 @@ final class FocusFx {
         noise.setVisibility(View.VISIBLE);
         play(soundStatic, 0.3f, 0);
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
-        animator.setDuration(320);
+        animator.setDuration(length(320));
         animator.setInterpolator(new LinearInterpolator());
+        // A new grain about every 33 ms of a longer focus_style_ms, so the snow does not slow down with it.
+        int grains = (int) Math.max(14, styleMs / 33);
         animator.addUpdateListener(a -> {
             float f = a.getAnimatedFraction();
-            noise.setBackground(noiseFrames[(int) (f * 14) % noiseFrames.length]);
+            noise.setBackground(noiseFrames[(int) (f * grains) % noiseFrames.length]);
             noise.setAlpha(f < 0.35f ? f / 0.35f * 0.55f : 0.55f * (1f - (f - 0.35f) / 0.65f));
             top.setAlpha(f < 0.3f ? 0f : Math.min(1f, (f - 0.3f) / 0.4f));
             top.setTranslationX(f < 0.8f ? (random.nextFloat() - 0.5f) * 18 * dp : 0f);
@@ -198,7 +216,11 @@ final class FocusFx {
     /** The new picture comes on like a failing bulb: two dips, then steady. Never more than 3 flashes a second. */
     private void flicker() {
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f, 0.35f, 1f, 0.6f, 1f);
-        animator.setDuration(560);
+        // Its two dips stay under 3 flashes a second on screen, also with a shortened animator scale (0.5 here).
+        long ms = length(560);
+        float scale = ValueAnimator.getDurationScale();
+        if (scale > 0f && ms * scale < 700f) ms = Math.round(700f / scale);
+        animator.setDuration(ms);
         animator.setInterpolator(new LinearInterpolator());
         animator.addUpdateListener(a -> top.setAlpha((float) a.getAnimatedValue()));
         endWithSettle(animator);
