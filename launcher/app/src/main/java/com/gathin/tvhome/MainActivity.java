@@ -52,6 +52,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -250,6 +251,28 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private static int lastFocused = 0;
     /** App of the last focused tile, so focus follows it when the app list changes. */
     private static String lastFocusedKey;
+    /** The tile whose focus last picked a focus_wallpapers picture (WallpaperPlayer.focus). */
+    private String wallpaperFocusKey;
+    /** Asks WallpaperPlayer again for the focused item's picture, once the idle approach is sent away. */
+    private Runnable wallpaperRefocus;
+    /** focus_idle_minutes: the idle approach's stage on screen (0 = none) and the wait before each stage. */
+    private int approachStage;
+    private long approachStepMs;
+    /** An approach picture may still be on screen: the next refocus replaces it. */
+    private boolean approachShown;
+    private final Runnable approachStep = new Runnable() {
+        @Override
+        public void run() {
+            if (!resumed || approachStage >= 3) return;
+            approachStage++;
+            wallpaperPlayer.approach(approachStage);
+            if (approachStage < 3) root.postDelayed(this, approachStepMs);
+        }
+    };
+    private final Runnable wakeRefocus = () -> {
+        approachShown = false;
+        if (wallpaperRefocus != null) wallpaperRefocus.run();
+    };
     private float density;
     /** Module cards (res/values/config.xml, module_cards): discovered on resume, shown only after the owner's Show. */
     private boolean moduleCards;
@@ -513,6 +536,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // the theme's background, so launch looks the same.
         getWindow().setBackgroundDrawable(null);
         wallpaperPlayer = new WallpaperPlayer(this, root, cfg);
+        approachStepMs = wallpaperPlayer.approachStepMs();
+        Log.i("TvHome.Approach", approachStepMs > 0 ? "on, " + approachStepMs / 1000 + " s a stage" : "off");
         sky = findViewById(R.id.sky);
         sky.setIntensity(cfg.skyIntensity);
         glass = findViewById(R.id.glass);
@@ -936,6 +961,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalFocusChangeListener((oldF, newF) -> {
             boolean onTile = newF != null && newF.getId() == R.id.card;
             if (!onTile) hideGlass();
+            // focus_wallpapers: the top bar's buttons show the theme's "telhado" pictures.
+            if (newF != null && (newF.getId() == R.id.btnSettings || newF.getId() == R.id.btnWifi
+                    || newF.getId() == R.id.btnInputs)) {
+                wallpaperFocusKey = null;
+                wallpaperRefocus = () -> wallpaperPlayer.focusSlot("telhado");
+                root.removeCallbacks(wakeRefocus);
+                approachShown = false;
+                wallpaperPlayer.motion(0, -1);
+                wallpaperPlayer.focusSlot("telhado");
+            }
         });
 
         packageFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -1300,6 +1335,22 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private void restartIdleClock() {
         root.removeCallbacks(showIdleClock);
         if (resumed && idleClockMs > 0) root.postDelayed(showIdleClock, idleClockMs);
+        restartApproach();
+    }
+
+    /** focus_idle_minutes: any key sends the approach away (back to the focused item's picture) and waits again. */
+    private void restartApproach() {
+        root.removeCallbacks(approachStep);
+        if (approachStage > 0) {
+            Log.i("TvHome.Approach", "sent away at stage " + approachStage);
+            approachStage = 0;
+            wallpaperPlayer.approach(0);
+            approachShown = true;
+        }
+        root.removeCallbacks(wakeRefocus);
+        // A key that also moves focus asks for its own picture first and cancels this.
+        if (approachShown) root.postDelayed(wakeRefocus, 200);
+        if (resumed && approachStepMs > 0) root.postDelayed(approachStep, approachStepMs);
     }
 
     @Override
@@ -1311,6 +1362,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         RemoteKeys.release(this);
         cancelHoldOk();
         root.removeCallbacks(showIdleClock);
+        root.removeCallbacks(approachStep);
+        root.removeCallbacks(wakeRefocus);
         endReorder();   // Home or another app while reordering keeps the order so far
         wallpaperPlayer.stop();
         stopAmbientAnimation();
@@ -1429,6 +1482,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        // focus_idle_minutes: which keys reset the approach (adb logcat -s TvHome.Approach).
+        if (approachStepMs > 0 && event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+            Log.i("TvHome.Approach", "key " + KeyEvent.keyCodeToString(event.getKeyCode()) + " (device " + event.getDeviceId() + ")");
+        }
         if (homeIgnoreChannelKeys && RemoteKeys.isChannelKey(event.getKeyCode())) return true;
         // Vendor keys (TCL Netflix button, 4062) never reach the key services, only the focused window, so their
         // "hold:" entries run here too or nowhere. Only while resumed: onPause releases Home's holds, and a DOWN
@@ -1807,6 +1864,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     @Override
     public void onTileFocused(int position, View card) {
+        int focusFrom = lastFocused;   // where the focus came from, for the wallpaper's push
         lastFocused = position;
         lastFocusedKey = adapter.keyAt(position);
         // Focus restored before the first layout (cold start): the tile has no size yet, and the glass
@@ -1816,6 +1874,19 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 if (card.isFocused() && card.getWidth() > 0) onTileFocused(position, card);
             });
             return;
+        }
+        // focus_wallpapers: a new tile in focus asks the wallpaper for a picture of its slot.
+        String focusKey = adapter.keyAt(position);
+        if (focusKey != null && !focusKey.equals(wallpaperFocusKey)) {
+            wallpaperFocusKey = focusKey;
+            String focusPkg = adapter.packageAt(position);
+            boolean focusDock = dockRow && (singleRow || position < COLUMNS);
+            wallpaperRefocus = () -> wallpaperPlayer.focus(focusPkg, focusDock);
+            root.removeCallbacks(wakeRefocus);
+            approachShown = false;
+            int step = position - focusFrom;
+            wallpaperPlayer.motion(Math.abs(step) == 1 ? step : 0, Math.abs(step) == 1 ? 0 : step >= 0 ? 1 : -1);
+            wallpaperPlayer.focus(focusPkg, focusDock);
         }
         // Tile rect in root coordinates, using layout positions (ignores the scale animation).
         Rect r = tileRect;
