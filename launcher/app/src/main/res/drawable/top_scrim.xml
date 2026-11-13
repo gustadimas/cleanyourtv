@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- top_scrim: dark at the very top, gone by the dock, so the clock, the date and the top bar stay readable over
+     bright wallpapers while the rest of the picture is untouched. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:type="linear"
+        android:angle="270"
+        android:startColor="#99000000"
+        android:centerColor="#47000000"
+        android:centerY="0.5"
+        android:endColor="#00000000" />
+</shape>

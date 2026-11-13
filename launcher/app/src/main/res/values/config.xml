@@ -372,6 +372,18 @@
          They leave the grid. Missing apps are skipped. Can also be set with "top_bar_apps" in a theme. -->
     <string-array name="top_bar_apps" translatable="false">
     </string-array>
+    <!-- Where the top_bar_apps buttons go: "network" (beside the network pill, the default), "start" (before Inputs,
+         at the start of the bar) or "end" (after Settings). -->
+    <string name="top_bar_apps_position" translatable="false">network</string>
+    <!-- A glyph for a top_bar_apps button instead of the app's own logo, as "package=drawable" (a drawable bundled
+         with the launcher; res/raw/keep.xml keeps the ones named ic_top_*). The glyph takes the pills' white and turns
+         dark on focus, like Inputs and Settings, so the bar keeps one icon style; an app without an entry keeps its
+         coloured logo. Bundled: ic_top_media (a media player) and ic_top_store (an app store). -->
+    <string-array name="top_bar_icons" translatable="false">
+    </string-array>
+    <!-- A soft dark gradient behind the clock and the top bar (drawable/top_scrim), so the header stays readable
+         over bright wallpapers; the picture below it is untouched. -->
+    <bool name="top_scrim">false</bool>
     <!-- The Inputs pill in the top bar, shown when the TV has inputs to list. false hides it for good; what the
          remote's Input button does is unchanged. Can also be set with "show_inputs_pill" in a theme. -->
     <bool name="show_inputs_pill">true</bool>

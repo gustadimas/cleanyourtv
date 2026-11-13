@@ -583,6 +583,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             ((TextView) findViewById(R.id.date)).setTextColor(Color.WHITE);
             findViewById(R.id.clockDivider).setBackgroundColor(Color.WHITE);
         }
+        // top_scrim: the dark gradient behind the header (only the default layout has it).
+        View topScrim = findViewById(R.id.topScrim);
+        if (topScrim != null) {
+            topScrim.setVisibility(getResources().getBoolean(R.bool.top_scrim) ? View.VISIBLE : View.GONE);
+        }
         if (getResources().getBoolean(R.bool.rtl_menu_bar)) {
             // Center Hebrew greetings over the numeric time, independent of a visible AM/PM label. The clock's row
             // is watched too: date_below_clock can move the whole row right under a wider date.
@@ -924,7 +929,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
         // Keep focus on the top bar at its ends and at the top: Android's focus finder would otherwise
         // jump to a tile far below when there is nothing in that direction.
-        boolean rtlMenuBar = getResources().getBoolean(R.bool.rtl_menu_bar);
+        ViewGroup topBar = findViewById(R.id.topButtons);
         View.OnKeyListener pillKeys = (v, keyCode, event) -> {
             if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
             if (keyCode == KeyEvent.KEYCODE_DPAD_UP) return true;
@@ -933,11 +938,17 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 focusTile(singleRow ? lastFocused : lastFocused % COLUMNS);
                 return true;
             }
-            int firstButton = btnInputs.getVisibility() == View.VISIBLE ? R.id.btnInputs : firstTopButton().getId();
-            int leftButton = rtlMenuBar ? R.id.btnSettings : firstButton;
-            int rightButton = rtlMenuBar ? firstButton : R.id.btnSettings;
-            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) return v.getId() == leftButton;
-            return keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && v.getId() == rightButton;
+            // The bar's ends are its first and last shown buttons: bar order is screen order, in the mirrored
+            // Hebrew bar too, and top_bar_apps_position can put the app buttons at either end.
+            View leftEnd = null, rightEnd = null;
+            for (int k = 0; k < topBar.getChildCount(); k++) {
+                View button = topBar.getChildAt(k);
+                if (button.getVisibility() != View.VISIBLE) continue;
+                if (leftEnd == null) leftEnd = button;
+                rightEnd = button;
+            }
+            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) return v == leftEnd;
+            return keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && v == rightEnd;
         };
         btnInputs.setOnKeyListener(pillKeys);
         btnWifi.setOnKeyListener(pillKeys);
@@ -963,7 +974,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             if (!onTile) hideGlass();
             // focus_wallpapers: the top bar's buttons show the theme's "telhado" pictures.
             if (newF != null && (newF.getId() == R.id.btnSettings || newF.getId() == R.id.btnWifi
-                    || newF.getId() == R.id.btnInputs)) {
+                    || newF.getId() == R.id.btnInputs || topAppButtons.contains(newF))) {
                 wallpaperFocusKey = null;
                 wallpaperRefocus = () -> wallpaperPlayer.focusSlot("telhado");
                 root.removeCallbacks(wakeRefocus);
@@ -2654,6 +2665,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         ViewGroup bar = findViewById(R.id.topButtons);
         PackageManager pm = getPackageManager();
         int size = Math.round(22 * density);
+        // top_bar_icons: "package=drawable", a glyph in the pills' own style instead of the app's coloured logo.
+        Map<String, Integer> glyphs = new HashMap<>();
+        for (String entry : getResources().getStringArray(R.array.top_bar_icons)) {
+            int eq = entry.indexOf('=');
+            if (eq <= 0) continue;
+            int id = getResources().getIdentifier(entry.substring(eq + 1).trim(), "drawable", getPackageName());
+            if (id != 0) glyphs.put(entry.substring(0, eq).trim(), id);
+        }
         for (String pkg : packages) {
             Intent launch = pm.getLeanbackLaunchIntentForPackage(pkg);
             if (launch == null) launch = pm.getLaunchIntentForPackage(pkg);
@@ -2675,17 +2694,36 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             TextView button = (TextView) getLayoutInflater().inflate(R.layout.top_app_button, bar, false);
             // pillKeys finds the bar's ends by id: without one of its own, every app button would be an end.
             button.setId(View.generateViewId());
-            logo.setBounds(0, 0, size, size);
-            button.setCompoundDrawablesRelative(logo, null, null, null);
-            button.setCompoundDrawableTintList(null);
+            Integer glyph = glyphs.get(pkg);
+            if (glyph != null) {
+                // Keeps the style's drawableTint: white like Inputs and Settings, dark on the focused pill.
+                Drawable icon = getDrawable(glyph).mutate();
+                icon.setBounds(0, 0, size, size);
+                button.setCompoundDrawablesRelative(icon, null, null, null);
+            } else {
+                logo.setBounds(0, 0, size, size);
+                button.setCompoundDrawablesRelative(logo, null, null, null);
+                button.setCompoundDrawableTintList(null);
+            }
             button.setContentDescription(label);
             Intent target = launch;
             // An input: action switches the TV input, as the tile for the same app does.
             String inputId = LaunchActions.inputId(launchActions.get(pkg));
             if (inputId != null) button.setOnClickListener(v -> openInput(inputId));
             else button.setOnClickListener(v -> open(new Intent(target)));
-            // After the network pill and the VPN pill; the Hebrew bar runs the other way, so before both there.
-            bar.addView(button, bar.indexOfChild(getResources().getBoolean(R.bool.rtl_menu_bar) ? btnVpn : btnWifi));
+            // top_bar_apps_position: "start" before Inputs, "end" after Settings, otherwise beside the network pill.
+            // The Hebrew bar is listed mirrored (Settings first), so its start and end are the other way round.
+            boolean rtl = getResources().getBoolean(R.bool.rtl_menu_bar);
+            String position = getString(R.string.top_bar_apps_position);
+            if ("start".equals(position)) {
+                bar.addView(button, bar.indexOfChild(btnInputs) + (rtl ? 1 : 0));
+            } else if ("end".equals(position)) {
+                if (rtl) bar.addView(button, 0);
+                else bar.addView(button);
+            } else {
+                // After the network pill and the VPN pill; the Hebrew bar runs the other way, so before both there.
+                bar.addView(button, bar.indexOfChild(rtl ? btnVpn : btnWifi));
+            }
             topAppButtons.add(button);
         }
     }

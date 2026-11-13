@@ -30,6 +30,17 @@
         android:layout_height="match_parent"
         android:alpha="0" />
 
+    <!-- top_scrim (config.xml): a soft dark gradient behind the clock and the top bar, over the wallpaper and
+         under everything else, so the header reads on bright pictures too. -->
+    <View
+        android:id="@+id/topScrim"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_gravity="top"
+        android:background="@drawable/top_scrim"
+        android:visibility="gone"
+        android:importantForAccessibility="no" />
+
     <!-- Race-weekend panel (a theme's race_calendar, see RaceWeekend): in the free space under the clock,
          shown only from shortly before a weekend's first session until the race is over. Updated once a
          minute with the clock, never animated. -->
@@ -193,7 +204,7 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginStart="4dp"
-                    android:textColor="#8CFFFFFF"
+                    android:textColor="#B3FFFFFF"
                     android:textSize="12sp"
                     android:fontFamily="@string/font_medium"
                     android:letterSpacing="0.22"
