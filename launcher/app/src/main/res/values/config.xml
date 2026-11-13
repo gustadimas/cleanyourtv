@@ -9,9 +9,11 @@
          and saved on the device. Missing apps are skipped. -->
     <string-array name="dock_apps">
         <item>com.amazon.firetv.youtube</item>
-        <item>com.netflix.ninja</item>
         <item>com.amazon.firebat</item>
-        <item>com.apple.airplay.amazon.airplay</item>
+        <item>com.stremio.one</item>
+        <item>com.crunchyroll.crunchyroid</item>
+        <item>tv.twitch.android.viewer</item>
+        <item>com.kick.mobile</item>
     </string-array>
 
     <!-- Apps never shown as tiles (e.g. the Live TV app, which the Inputs menu already covers). -->
@@ -21,11 +23,12 @@
         <item>com.amazon.smarthomemapviewapp</item>  <!-- Alexa Smart Home -->
         <item>com.amazon.spiderpork</item>   <!-- Luna -->
         <item>com.amazon.bueller.music</item>
+        <item>com.amazon.firetv.troubleshooting</item>   <!-- Fire TV Stick: a stub with no icon of its own -->
     </string-array>
 
     <!-- The TV's Live TV / tuner app, offered at the end of the Inputs menu. Leave empty to omit. -->
-    <string name="live_tv_package" translatable="false">com.amazon.tv.livetv</string>
+    <string name="live_tv_package" translatable="false"></string>   <!-- Fire TV Stick: no tuner or HDMI inputs -->
 
     <!-- Tiles per row in the grid, and the most apps the dock can hold. -->
-    <integer name="columns">4</integer>
+    <integer name="columns">6</integer>   <!-- 6 so the dock holds YouTube, Prime, Stremio, Crunchyroll, Twitch, Kick -->
 </resources>
