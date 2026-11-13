@@ -1,0 +1,5 @@
+## tv.twitch.android.app camada='tv.twitch.android.app/tv.twitch.starshot64.app.StarshotActivity#0'
+abertura TotalTime=3262 ms
+quadros=118 intervalos_em_movimento=109 lentos(>33ms)=17 (16%) p50=17ms p90=50ms p99=100ms max=133ms
+PSS: TOTAL PSS:   129528            TOTAL RSS:   199220       TOTAL SWAP PSS:     1629
+MemAvailable: MemAvailable:     321328 kB

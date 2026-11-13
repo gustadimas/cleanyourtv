@@ -1,0 +1,3 @@
+# Lote 4 - pedidos do dono depois de ver o launcher novo
+com.tcl.t_solo        # T-Solo ("ouvir sozinho": som da TV só no fone Bluetooth)
+com.tcl.suspension    # Painel rápido da TCL (a engrenagem do controle abre as Configurações do Android, não ele)

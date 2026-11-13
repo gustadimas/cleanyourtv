@@ -1,0 +1,10 @@
+## com.amazon.amazonvideo.livingroom camada='SurfaceView - com.amazon.amazonvideo.livingroom/com.amazon.ignition.IgnitionActivity#0'
+abertura TotalTime=1173 ms
+quadros=127 intervalos_em_movimento=118 lentos(>33ms)=21 (18%) p50=17ms p90=50ms p99=150ms max=234ms
+PSS: TOTAL PSS:   244712            TOTAL RSS:   230964       TOTAL SWAP PSS:    76220
+MemAvailable: MemAvailable:     240112 kB
+## com.crunchyroll.crunchyroid camada='com.crunchyroll.crunchyroid/com.crunchyroll.crunchyroid.main.ui.MainActivity#0'
+abertura TotalTime=3315 ms
+quadros=29 intervalos_em_movimento=19 lentos(>33ms)=0 (0%) p50=17ms p90=17ms p99=33ms max=33ms
+PSS: TOTAL PSS:   206031            TOTAL RSS:   279460       TOTAL SWAP PSS:     1449
+MemAvailable: MemAvailable:     363688 kB

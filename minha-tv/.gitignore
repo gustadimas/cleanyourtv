@@ -1,0 +1,14 @@
+# Fica só no PC, fora do git:
+# - as imagens dos temas: backdrops do TMDB ("uso pessoal, não redistribuir", veja terror/*/fontes.txt)
+#   e capturas de jogos (_antigo);
+# - os .zip e a prévia HTML, que carregam essas mesmas imagens;
+# - o log da última compilação.
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.zip
+terror/slasher/previa.html
+compilacao.log
+# A prévia dos 25 temas oficiais do repositório pode ir (só usa imagens que já estão nele).
+!temas-disponiveis.jpg

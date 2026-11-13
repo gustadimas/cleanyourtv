@@ -1,0 +1,5 @@
+## tela inicial (5-escala1) camada='com.gathin.tvhome/com.gathin.tvhome.MainActivity#0'
+movimento 1: quadros=44 duracao_animada=850ms lentos(>33ms)=2 pior=99ms
+movimento 2: quadros=49 duracao_animada=849ms lentos(>33ms)=2 pior=50ms
+movimento 3: quadros=49 duracao_animada=816ms lentos(>33ms)=1 pior=34ms
+movimento 4: quadros=49 duracao_animada=816ms lentos(>33ms)=1 pior=34ms

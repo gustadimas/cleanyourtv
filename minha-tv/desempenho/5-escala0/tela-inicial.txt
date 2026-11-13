@@ -1,0 +1,10 @@
+## tela inicial (5-escala0) camada='a724caf com.gathin.tvhome/com.gathin.tvhome.MainActivity#0'
+movimento 1: quadros=0 duracao_animada=0ms lentos(>33ms)=0 pior=0ms
+movimento 2: quadros=0 duracao_animada=0ms lentos(>33ms)=0 pior=0ms
+movimento 3: quadros=0 duracao_animada=0ms lentos(>33ms)=0 pior=0ms
+movimento 4: quadros=0 duracao_animada=0ms lentos(>33ms)=0 pior=0ms
+## tela inicial (5-escala0) camada='com.gathin.tvhome/com.gathin.tvhome.MainActivity#0'
+movimento 1: quadros=7 duracao_animada=133ms lentos(>33ms)=1 pior=51ms
+movimento 2: quadros=8 duracao_animada=150ms lentos(>33ms)=1 pior=50ms
+movimento 3: quadros=8 duracao_animada=150ms lentos(>33ms)=1 pior=50ms
+movimento 4: quadros=8 duracao_animada=149ms lentos(>33ms)=1 pior=50ms

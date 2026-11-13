@@ -1,0 +1,8 @@
+# Lote 1 - conta, telemetria e propaganda (TCL C06 / Android TV 11 / TCL-LA-MT9221-01)
+com.tcl.usercenter                     # conta TCL (o sistema pode religar a cada boot; fica ociosa)
+com.tcl.guard                          # TGuard, limpador/suporte
+com.tcl.partnercustomizer              # linhas promocionais da tela inicial original
+com.tcl.waterfall.overseas             # TCL Channel / portal de vídeos
+com.tcl.esticker                       # adesivo de demonstração de loja
+android.autoinstalls.config.tcl.device # instalação automática de apps parceiros
+com.google.android.feedback            # envio de feedback ao Google

@@ -1,0 +1,39 @@
+{
+  "wallpaper": true,
+  "wallpaper_rotation_minutes": 1440,
+  "wallpaper_order": "shuffle",
+  "wallpaper_captions": true,
+  "wallpaper_dim": 12,
+  "ambient_glow": false,
+  "dock_glass": true,
+  "dock_opacity": 55,
+  "focus_wallpapers": [
+    "com.google.android.youtube.tv=youtube",
+    "com.amazon.amazonvideo.livingroom=prime",
+    "com.stremio.one=stremio",
+    "com.crunchyroll.crunchyroid=crunchyroll",
+    "tv.twitch.android.app=twitch",
+    "tv.twitch.android.viewer=twitch",
+    "com.kick.mobile=kick",
+    "*dock=twitch",
+    "*grid=porao"
+  ],
+  "focus_mix": true,
+  "focus_effects": true,
+  "focus_style": "static",
+  "focus_style_ms": 600,
+  "focus_sounds": false,
+  "focus_idle_minutes": 1,
+  "focus_sets": [
+    "assassino=halloween,sexta13,pesadelo,panico,massacre,chucky,freddyjason,terrifier",
+    "zumbi=noite68,despertar78,madrugada04,dia85,exterminio,exterminio2,rec,guerraz,busan,peninsula,alive,twd"
+  ],
+  "focus_idle_alerts": [
+    "assassino=Tem alguém lá fora|A porta está aberta|Ele está dentro de casa|Ele sumiu.",
+    "zumbi=Movimento lá fora|Estão na cerca|Eles entraram|Eles recuaram."
+  ],
+  "focus_days": [
+    "F13=sexta13,freddyjason",
+    "10-31=halloween,terrifier"
+  ]
+}

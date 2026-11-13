@@ -1,0 +1,240 @@
+halloween-youtube.jpg	Haddonfield — Ele some quando você olha de novo.
+halloween-prime.jpg	Noite de babá — A luz do corredor não acende.
+halloween-stremio.jpg	Vigília — O doutor espera do outro lado da rua.
+halloween-crunchyroll.jpg	Armário — Um cabide é a única arma que sobrou.
+halloween-twitch.jpg	Fantasia — Um lençol e um par de óculos.
+halloween-kick.jpg	Escada — Ele desce devagar. Nunca corre.
+halloween-telhado.jpg	31 de outubro — As abóboras ainda estão acesas.
+halloween-porao.jpg	Casa da esquina — Ninguém mora lá. A luz acendeu.
+halloween-perto1.jpg	Calçada — Alguém está te seguindo.
+halloween-perto2.jpg	Porta da frente — A porta ficou aberta.
+halloween-perto3.jpg	Atrás da porta — Ele está aqui.
+halloween-raro.jpg	Armário — Atrás de você.
+sexta13-youtube.jpg	Crystal Lake — A luz da varanda apagou sozinha.
+sexta13-prime.jpg	Trilha do lago — Não solte a mão dela.
+sexta13-stremio.jpg	Floresta — Ele anda. Você corre. Ele chega antes.
+sexta13-crunchyroll.jpg	Cemitério — Chuva forte e um facão.
+sexta13-twitch.jpg	Máscara de hóquei — Atrás dela não tem ninguém.
+sexta13-kick.jpg	Túmulo — Nunca deviam ter desenterrado.
+sexta13-telhado.jpg	Cabana 4 — Vazia desde o verão.
+sexta13-porao.jpg	Barracão — O facão sumiu do gancho.
+sexta13-perto1.jpg	Margem do lago — Tem alguém entre as árvores.
+sexta13-perto2.jpg	Clareira — Ele está vindo para a cabana.
+sexta13-perto3.jpg	Varanda — Ele colocou a máscara.
+sexta13-raro.jpg	Acampamento — Conte quantos são. Conte de novo.
+pesadelo-youtube.jpg	Banheira — Não feche os olhos.
+pesadelo-prime.jpg	Escola — Um rastro vermelho até o fim do corredor.
+pesadelo-stremio.jpg	3h da manhã — Tem um rosto na parede.
+pesadelo-crunchyroll.jpg	Sala de aula — Isso não estava aqui antes.
+pesadelo-twitch.jpg	Elm Street — Faz três noites que ela não dorme.
+pesadelo-kick.jpg	Garras — Lâminas riscando a parede.
+pesadelo-telhado.jpg	Elm Street — Todas as luzes acesas às 3h.
+pesadelo-porao.jpg	Caldeira — Aqui embaixo é sempre quente.
+pesadelo-perto1.jpg	Neblina — Tem alguém no fim da neblina.
+pesadelo-perto2.jpg	Beco — Os braços dele crescem.
+pesadelo-perto3.jpg	Caldeira — Você dormiu.
+pesadelo-raro.jpg	Corredor — Ela quer te mostrar uma coisa.
+panico-youtube.jpg	Woodsboro — Tem uma faca faltando no bloco.
+panico-prime.jpg	Telefone — A voz sabia o nome dela.
+panico-stremio.jpg	Festa — Todo mundo é suspeito.
+panico-crunchyroll.jpg	Cozinha — Ele está vendo você agora.
+panico-twitch.jpg	Quarto — Ele sabe a cor da sua blusa.
+panico-kick.jpg	Janela — Ele entrou pela janela. De novo.
+panico-telhado.jpg	Escola — Toque de recolher às 21h.
+panico-porao.jpg	Suspeitos — Um deles está mentindo.
+panico-perto1.jpg	Sala — O telefone tocou.
+panico-perto2.jpg	Varanda — Ele sabe onde você está.
+panico-perto3.jpg	Sala — Ele já entrou.
+panico-raro.jpg	Jornal — Mais um caso sem suspeito.
+massacre-youtube.jpg	Texas — Cinco amigos e uma van.
+massacre-prime.jpg	Van — Ninguém devia ter dado carona.
+massacre-stremio.jpg	Campo — Não vá até a casa vizinha.
+massacre-crunchyroll.jpg	Cemitério — Alguém andou abrindo túmulos.
+massacre-twitch.jpg	Jantar — O jantar está servido.
+massacre-kick.jpg	Olho — Não pisque.
+massacre-telhado.jpg	Lua cheia — Noite quente. Ninguém dorme.
+massacre-porao.jpg	Sala dos ossos — Os móveis são feitos de quê?
+massacre-perto1.jpg	Pôr do sol — Tem alguém andando no campo.
+massacre-perto2.jpg	Casa da família — Você entrou na casa errada.
+massacre-perto3.jpg	Cozinha — Ouviu o motor?
+massacre-raro.jpg	Estrada — A serra ligou.
+chucky-youtube.jpg	Quarto — Ele mexeu a cabeça. Juro.
+chucky-prime.jpg	Aniversário — Sem pilha. Ele fala mesmo assim.
+chucky-stremio.jpg	Presente — Uma faca no lugar do laço.
+chucky-crunchyroll.jpg	Tempestade — Raio no prédio. As luzes apagam.
+chucky-twitch.jpg	Loja — Um raio, um ritual, um boneco.
+chucky-kick.jpg	Prateleira — Ele é pequeno. A faca não.
+chucky-telhado.jpg	Sala — Ele adora desenho animado.
+chucky-porao.jpg	Porão — Passinhos no andar de cima.
+chucky-perto1.jpg	Parapeito — Passos pequenos lá fora.
+chucky-perto2.jpg	Cozinha — Ele achou a faca.
+chucky-perto3.jpg	Escuro — Ele está embaixo da cama.
+chucky-raro.jpg	Debaixo da cama — Ele não é de brinquedo.
+freddyjason-youtube.jpg	Acampamento — Dois monstros e uma noite só.
+freddyjason-prime.jpg	Píer — Ninguém nada à noite.
+freddyjason-stremio.jpg	Springwood — Ele precisa que você tenha medo.
+freddyjason-crunchyroll.jpg	Fogo — Fogo não mata quem já morreu.
+freddyjason-twitch.jpg	Cara a cara — Nenhum dos dois pisca.
+freddyjason-kick.jpg	Neblina — Garras contra facão.
+freddyjason-telhado.jpg	Crystal Lake — O lago está calmo demais.
+freddyjason-porao.jpg	Duelo — O vencedor ainda está por aí.
+freddyjason-perto1.jpg	Rua — Alguém de chapéu na calçada.
+freddyjason-perto2.jpg	Caldeiras — Os dois estão aqui embaixo.
+freddyjason-perto3.jpg	Escuro — Os dois te viram.
+freddyjason-raro.jpg	Pesadelo duplo — Hoje são dois.
+terrifier-youtube.jpg	Quarto infantil — Ele não fala. Só sorri.
+terrifier-prime.jpg	Cortina vermelha — O show está começando.
+terrifier-stremio.jpg	Porta dos fundos — Ele acenou. Não acene de volta.
+terrifier-crunchyroll.jpg	Halloween — Doces ou travessuras? Nenhum dos dois.
+terrifier-twitch.jpg	Lua vermelha — Ele voltou na noite errada.
+terrifier-kick.jpg	Parque — A roda-gigante girou sozinha.
+terrifier-telhado.jpg	Halloween — As fantasias estão em liquidação.
+terrifier-porao.jpg	Palco — Ele ensaia no porão.
+terrifier-perto1.jpg	Loja de fantasias — Tem um palhaço parado na loja.
+terrifier-perto2.jpg	Corredor — Ele está encostado na sua porta.
+terrifier-perto3.jpg	Aqui — Ele está acenando para você.
+terrifier-raro.jpg	Balcão da loja — Não vire.
+noite68-youtube.jpg	Cemitério — Era só para deixar flores no túmulo.
+noite68-prime.jpg	Fazenda — Pregue as tábuas antes do anoitecer.
+noite68-stremio.jpg	Janela — O fogo afasta eles. Por um tempo.
+noite68-crunchyroll.jpg	Patrulha — Eles andam devagar. Mas não param.
+noite68-twitch.jpg	Quintal — Estão cercando a casa.
+noite68-kick.jpg	Noite — A caminhonete pegou fogo.
+noite68-telhado.jpg	Casa da fazenda — Ninguém sai até amanhecer.
+noite68-porao.jpg	Porão — O porão é mais seguro. Ele jura.
+noite68-perto1.jpg	Campo aberto — Eles vêm pelo campo.
+noite68-perto2.jpg	Noite — Estão na varanda.
+noite68-perto3.jpg	Escuro — Ela acordou com fome.
+noite68-raro.jpg	Escada — Tem alguém no andar de cima.
+despertar78-youtube.jpg	Shopping — Eles voltam para onde viviam.
+despertar78-prime.jpg	Loja de departamentos — Tudo de graça. Ninguém no caixa.
+despertar78-stremio.jpg	Corredor — Quatro sobreviventes e um shopping.
+despertar78-crunchyroll.jpg	Loja — Eles lembram de fazer compras.
+despertar78-twitch.jpg	Escritório — Ninguém quer ficar aqui para sempre.
+despertar78-kick.jpg	Depósito — Feche a porta de aço.
+despertar78-telhado.jpg	Telhado — O helicóptero ainda tem combustível.
+despertar78-porao.jpg	Depósito — Munição contada, porta trancada.
+despertar78-perto1.jpg	Estacionamento — O estacionamento está cheio.
+despertar78-perto2.jpg	Corredor — Eles entraram no shopping.
+despertar78-perto3.jpg	Porta — Estão na porta.
+despertar78-raro.jpg	Quarto — Ele acordou diferente.
+madrugada04-youtube.jpg	Rua — Eles correm.
+madrugada04-prime.jpg	Shopping — Mais sobreviventes. Mais problemas.
+madrugada04-stremio.jpg	Elevador — Ninguém aperta o botão do subsolo.
+madrugada04-crunchyroll.jpg	Viatura — Dirija. Não pare para ninguém.
+madrugada04-twitch.jpg	Mercado — Ela foi mordida. Ela diz que não.
+madrugada04-kick.jpg	Janela — Uma mão no vidro.
+madrugada04-telhado.jpg	Sala de segurança — As câmeras mostram o estacionamento.
+madrugada04-porao.jpg	Garagem — Os ônibus blindados estão prontos.
+madrugada04-perto1.jpg	Rodovia — São milhares.
+madrugada04-perto2.jpg	Pôr do sol — Eles vêm do sol.
+madrugada04-perto3.jpg	Rua — Ele está correndo na sua direção.
+madrugada04-raro.jpg	Horizonte — O dia acabou.
+dia85-youtube.jpg	Laboratório — Ele aprende a ouvir música.
+dia85-prime.jpg	Bunker — Cientistas e soldados não se entendem.
+dia85-stremio.jpg	Corredor — Ele bateu continência.
+dia85-crunchyroll.jpg	Arsenal — O capitão perdeu a paciência.
+dia85-twitch.jpg	Laboratório — Ele lembra como se barbeia.
+dia85-kick.jpg	Laboratório — Ele achou uma arma.
+dia85-telhado.jpg	Bunker — Um dia comum no fim do mundo.
+dia85-porao.jpg	Curral — Eles ficam presos na caverna.
+dia85-perto1.jpg	Cerca — A cerca está cedendo.
+dia85-perto2.jpg	Elevador — O elevador desceu sozinho.
+dia85-perto3.jpg	Escuro — Ele está a um passo.
+dia85-raro.jpg	Parede — Mãos atravessando a parede.
+exterminio-youtube.jpg	Londres — Ponte vazia. Cidade vazia.
+exterminio-prime.jpg	Táxi — Ninguém dirige à noite.
+exterminio-stremio.jpg	Apartamento — Uma família improvisada.
+exterminio-crunchyroll.jpg	Túnel — A lanterna atrai eles.
+exterminio-twitch.jpg	Posto — Gasolina para mais um dia.
+exterminio-kick.jpg	Igreja — Não entre na igreja.
+exterminio-telhado.jpg	Telhado — Água da chuva e um rádio.
+exterminio-porao.jpg	Escada — Ninguém sobe sozinho.
+exterminio-perto1.jpg	Hospital — Você acordou sozinho.
+exterminio-perto2.jpg	Chuva — Um soldado infectado.
+exterminio-perto3.jpg	Olhos vermelhos — Vinte segundos para virar.
+exterminio-raro.jpg	Mansão — Ninguém aqui está salvo.
+exterminio2-youtube.jpg	Zona verde — Os soldados te escoltam.
+exterminio2-prime.jpg	Telhado — O atirador tem ordens novas.
+exterminio2-stremio.jpg	Rua — Corram para o metrô.
+exterminio2-crunchyroll.jpg	Helicóptero — Nenhum lugar é seguro.
+exterminio2-twitch.jpg	Túnel — Siga a luz. Não pare.
+exterminio2-kick.jpg	Crianças — Eles têm os olhos da mãe.
+exterminio2-telhado.jpg	Estádio — O ponto de encontro está vazio.
+exterminio2-porao.jpg	Portão — A quarentena falhou.
+exterminio2-perto1.jpg	Cidade — Eles voltaram para Londres.
+exterminio2-perto2.jpg	Fazenda — Ele correu. Ela ficou.
+exterminio2-perto3.jpg	Píer — O barco não vai esperar.
+exterminio2-raro.jpg	Código vermelho — Contaminação confirmada.
+rec-youtube.jpg	Quartel — Uma noite tranquila com os bombeiros.
+rec-prime.jpg	Prédio — O prédio foi lacrado por fora.
+rec-stremio.jpg	Apartamento — Tem alguém no escuro.
+rec-crunchyroll.jpg	Escada — Vista de cima, é pior.
+rec-twitch.jpg	Câmera — Continue gravando.
+rec-kick.jpg	Térreo — Um bombeiro caiu da escada.
+rec-telhado.jpg	Quartel — Reportagem ao vivo.
+rec-porao.jpg	Cobertura — Ninguém sobe à cobertura.
+rec-perto1.jpg	Escada — Eles estão subindo.
+rec-perto2.jpg	Corredor — Ela ainda é uma menina?
+rec-perto3.jpg	Luz da câmera — Não baixe a câmera.
+rec-raro.jpg	Visão noturna — Não faça barulho.
+guerraz-youtube.jpg	Filadélfia — O trânsito parou de vez.
+guerraz-prime.jpg	Táxi — Dirija. Não olhe para trás.
+guerraz-stremio.jpg	Cidade em chamas — Família primeiro.
+guerraz-crunchyroll.jpg	Muralha — Soldados e civis na mesma fila.
+guerraz-twitch.jpg	Corredor vermelho — Doze segundos para virar.
+guerraz-kick.jpg	Helicóptero — A cidade caiu.
+guerraz-telhado.jpg	Telhado — A cidade inteira, lá embaixo.
+guerraz-porao.jpg	Laboratório — Ala B. Silêncio total.
+guerraz-perto1.jpg	Horizonte — Fumaça em todas as direções.
+guerraz-perto2.jpg	Muralha — Eles escalam uns aos outros.
+guerraz-perto3.jpg	Muralha — Passaram a muralha.
+guerraz-raro.jpg	Fim do mundo — Ninguém sabe onde começou.
+busan-youtube.jpg	Trem — Vagão 13. Ninguém sai.
+busan-prime.jpg	Vagão — Fita adesiva nos braços.
+busan-stremio.jpg	Vagão — Ele não abre a porta para ninguém.
+busan-crunchyroll.jpg	Estação — Corram para a próxima estação.
+busan-twitch.jpg	Trilhos — Pai e filha nos destroços.
+busan-kick.jpg	Corredor — Eles não enxergam no escuro.
+busan-telhado.jpg	Trilhos — A cidade caiu atrás do trem.
+busan-porao.jpg	Vagão — Ele trancou a porta por dentro.
+busan-perto1.jpg	Estação — Fuja. Agora.
+busan-perto2.jpg	Vagão — Estão no vagão ao lado.
+busan-perto3.jpg	Vagão — Atrás de você.
+busan-raro.jpg	Busan — Última parada.
+peninsula-youtube.jpg	Península — Quatro anos depois.
+peninsula-prime.jpg	Arena — Lá dentro, eles apostam vidas.
+peninsula-stremio.jpg	Mercado — Luzes vermelhas atraem eles.
+peninsula-crunchyroll.jpg	Abrigo — Uma família sobreviveu aqui.
+peninsula-twitch.jpg	Ruína — Ninguém aqui é seu amigo.
+peninsula-kick.jpg	Rua — Eles ouvem o motor.
+peninsula-telhado.jpg	Pôr do sol — O caminhão ainda anda.
+peninsula-porao.jpg	Escada rolante — Ela parou no meio.
+peninsula-perto1.jpg	Rua escura — Tem alguém na rua.
+peninsula-perto2.jpg	Luz — A luz chama eles.
+peninsula-perto3.jpg	Carro — O carro está cercado.
+peninsula-raro.jpg	Noite — Não pare o carro.
+alive-youtube.jpg	Apartamento — O drone ainda voa.
+alive-prime.jpg	Varanda — Ela está viva do outro lado.
+alive-stremio.jpg	Rádio — Alguém responde no rádio.
+alive-crunchyroll.jpg	Corredor — A porta do vizinho está aberta.
+alive-twitch.jpg	Corredor — A comida acabou ontem.
+alive-kick.jpg	Varanda — Corda improvisada.
+alive-telhado.jpg	Prédio — Sem sinal. Sem internet.
+alive-porao.jpg	Sala — Dia 20 sem sair de casa.
+alive-perto1.jpg	Lá embaixo — Eles estão no térreo.
+alive-perto2.jpg	Corredor — Estão no seu andar.
+alive-perto3.jpg	Janela — Ele está escalando.
+alive-raro.jpg	Porta — Não abra para ninguém.
+twd-youtube.jpg	Atlanta — A cidade está tomada.
+twd-prime.jpg	Prisão — O lugar mais seguro que achamos.
+twd-stremio.jpg	Cerca — A cerca aguenta mais um dia.
+twd-crunchyroll.jpg	Clareira — Ajoelhados, em fila.
+twd-twitch.jpg	Mata — Ninguém fica para trás.
+twd-kick.jpg	Comunidade — Regras novas.
+twd-telhado.jpg	Rodovia — A saída de Atlanta está parada.
+twd-porao.jpg	Celeiro — O celeiro está trancado. Por quê?
+twd-perto1.jpg	Colina — Fumaça no horizonte.
+twd-perto2.jpg	Rua — A horda está passando.
+twd-perto3.jpg	Mata — Mãos saindo da neblina.
+twd-raro.jpg	Sussurradores — Fale baixo.

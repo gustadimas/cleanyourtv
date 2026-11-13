@@ -1,0 +1,6 @@
+# Lote 2 - extras do Google e serviços em segundo plano
+com.google.android.play.games              # Play Games
+com.google.android.syncadapters.calendar   # sincronização de agenda
+com.google.android.apps.nbu.smartconnect.tv # medidor/economia de dados do Google
+com.google.android.tvrecommendations       # recomendações patrocinadas da tela inicial original
+com.google.android.tungsten.setupwraith    # assistente da 1a configuração (o Wi-Fi salvo é de com.google.uid.shared, não dele)

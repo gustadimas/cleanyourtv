@@ -1,0 +1,21 @@
+{
+  "wallpaper": true,
+  "wallpaper_rotation_minutes": 1440,
+  "wallpaper_order": "shuffle",
+  "wallpaper_captions": true,
+  "wallpaper_dim": 12,
+  "ambient_glow": false,
+  "dock_glass": true,
+  "dock_opacity": 55,
+  "focus_wallpapers": [
+    "com.google.android.youtube.tv=youtube",
+    "com.amazon.amazonvideo.livingroom=prime",
+    "com.stremio.one=stremio",
+    "com.crunchyroll.crunchyroid=crunchyroll",
+    "tv.twitch.android.app=twitch",
+    "tv.twitch.android.viewer=twitch",
+    "com.kick.mobile=kick",
+    "*dock=twitch",
+    "*grid=porao"
+  ]
+}

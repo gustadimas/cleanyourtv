@@ -1,0 +1,45 @@
+twd-youtube.jpg	Cozinha · subúrbio
+twd-prime.jpg	Mata · lua cheia
+twd-stremio.jpg	Ponte · fim de tarde
+twd-crunchyroll.jpg	Estrada · pôr do sol
+twd-twitch.jpg	Colina · crepúsculo
+twd-kick.jpg	Túnel do esgoto
+twd-telhado.jpg	Motel · base
+twd-porao.jpg	Celeiro · depósito
+twd-raro.jpg	Atrás de você
+left4dead-youtube.jpg	Casa segura · luz de emergência
+left4dead-prime.jpg	Rua do centro · madrugada
+left4dead-stremio.jpg	Beco · prédio abandonado
+left4dead-crunchyroll.jpg	Rua em chamas
+left4dead-twitch.jpg	Parque de diversões
+left4dead-kick.jpg	Pântano · chuva
+left4dead-telhado.jpg	Ponte · ponto de resgate
+left4dead-porao.jpg	Escritório · sangue no chão
+left4dead-raro.jpg	Contato próximo
+dayz-youtube.jpg	Fogueira · noite
+dayz-prime.jpg	Estrada · chuva
+dayz-stremio.jpg	Base · cerca de arame
+dayz-crunchyroll.jpg	Vila em ruínas
+dayz-twitch.jpg	Praça da cidade
+dayz-kick.jpg	Linha do trem · neblina
+dayz-telhado.jpg	Telhados · centro
+dayz-porao.jpg	Arsenal
+dayz-raro.jpg	Visitante
+b4b-youtube.jpg	Céu aberto · a gritadora
+b4b-prime.jpg	Corredor · rastro de sangue
+b4b-stremio.jpg	Floresta · o gigante
+b4b-crunchyroll.jpg	Túnel em chamas
+b4b-twitch.jpg	Máscaras · fumaça
+b4b-kick.jpg	Mata · fogueira
+b4b-telhado.jpg	Bar do forte
+b4b-porao.jpg	Depósito
+b4b-raro.jpg	Sem aviso
+zomboid-youtube.jpg	Centro da cidade · Kentucky
+zomboid-prime.jpg	Estacionamento · noite
+zomboid-stremio.jpg	Rua · chuva
+zomboid-crunchyroll.jpg	Bairro · inverno à noite
+zomboid-twitch.jpg	Casa invadida
+zomboid-kick.jpg	Estrada rural
+zomboid-telhado.jpg	Casa do lago · neve
+zomboid-porao.jpg	Oficina mecânica
+zomboid-raro.jpg	Visita

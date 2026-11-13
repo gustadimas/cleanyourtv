@@ -1,0 +1,2 @@
+# Lote 5 - desempenho (10/11/2026): libera memória em segundo plano
+com.google.android.inputmethod.latin   # Gboard; o teclado em uso é o da TCL (com.tcl.inputmethod.international), que continua

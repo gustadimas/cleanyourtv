@@ -1,0 +1,80 @@
+## com.crunchyroll.crunchyroid (com.crunchyroll.crunchyroid/.splash.ui.SplashActivity)
+/system/bin/sh: can't create /proc/sys/vm/drop_caches: Permission denied
+MemAvailable antes: MemAvailable:     316060 kB
+Status: ok
+LaunchState: COLD
+TotalTime: 3776
+WaitTime: 3793
+Total frames rendered: 28
+Janky frames: 17 (60.71%)
+50th percentile: 19ms
+90th percentile: 81ms
+95th percentile: 81ms
+99th percentile: 85ms
+Number Missed Vsync: 0
+Number High input latency: 15
+Number Slow UI thread: 7
+Number Slow bitmap uploads: 0
+Number Slow issue draw commands: 4
+PSS:            TOTAL PSS:   175606            TOTAL RSS:   237280       TOTAL SWAP PSS:     8991
+MemAvailable com o app aberto: MemAvailable:     294180 kB
+## com.crunchyroll.crunchyroid (com.crunchyroll.crunchyroid/.splash.ui.SplashActivity)
+/system/bin/sh: can't create /proc/sys/vm/drop_caches: Permission denied
+MemAvailable antes: MemAvailable:     339704 kB
+Status: ok
+LaunchState: COLD
+TotalTime: 2369
+WaitTime: 2376
+Total frames rendered: 28
+Janky frames: 14 (50.00%)
+50th percentile: 17ms
+90th percentile: 65ms
+95th percentile: 101ms
+99th percentile: 101ms
+Number Missed Vsync: 2
+Number High input latency: 15
+Number Slow UI thread: 8
+Number Slow bitmap uploads: 1
+Number Slow issue draw commands: 3
+PSS:            TOTAL PSS:   198054            TOTAL RSS:   249904       TOTAL SWAP PSS:    21834
+MemAvailable com o app aberto: MemAvailable:     315052 kB
+## com.amazon.amazonvideo.livingroom (com.amazon.amazonvideo.livingroom/com.amazon.ignition.IgnitionActivity)
+/system/bin/sh: can't create /proc/sys/vm/drop_caches: Permission denied
+MemAvailable antes: MemAvailable:     335424 kB
+Status: ok
+LaunchState: COLD
+TotalTime: 3212
+WaitTime: 3223
+Total frames rendered: 1
+Janky frames: 1 (100.00%)
+50th percentile: 30ms
+90th percentile: 30ms
+95th percentile: 30ms
+99th percentile: 30ms
+Number Missed Vsync: 0
+Number High input latency: 0
+Number Slow UI thread: 1
+Number Slow bitmap uploads: 0
+Number Slow issue draw commands: 1
+PSS:            TOTAL PSS:   240424            TOTAL RSS:   205124       TOTAL SWAP PSS:    83177
+MemAvailable com o app aberto: MemAvailable:     178360 kB
+## com.amazon.amazonvideo.livingroom (com.amazon.amazonvideo.livingroom/com.amazon.ignition.IgnitionActivity)
+/system/bin/sh: can't create /proc/sys/vm/drop_caches: Permission denied
+MemAvailable antes: MemAvailable:     348292 kB
+Status: ok
+LaunchState: COLD
+TotalTime: 1274
+WaitTime: 1294
+Total frames rendered: 1
+Janky frames: 1 (100.00%)
+50th percentile: 57ms
+90th percentile: 57ms
+95th percentile: 57ms
+99th percentile: 57ms
+Number Missed Vsync: 0
+Number High input latency: 1
+Number Slow UI thread: 0
+Number Slow bitmap uploads: 0
+Number Slow issue draw commands: 0
+PSS:            TOTAL PSS:   258415            TOTAL RSS:   203476       TOTAL SWAP PSS:    96165
+MemAvailable com o app aberto: MemAvailable:     173256 kB

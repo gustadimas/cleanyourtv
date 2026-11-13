@@ -1,0 +1,59 @@
+# TCL Android TV 11 - plataforma C06 (C06_2K_GB), MediaTek MT9221 (mt5867), ~920 MB RAM, painel 1280x720
+# Build AR2101 / AR21, software V8-T221T05-LF1V355, patch 2025-03-05, persist.tcl.client_type TCL-LA-MT9221-01
+# Lista aplicada em 2026-11-10, em quatro lotes (lote1-tcl.txt, lote2-google.txt, lote3-escolhas.txt, lote4-extras.txt), mais o lote 5 de desempenho (10/11, à tarde)
+#   e o lote 6 (lote6-alexa.txt, Alexa, 12/11).
+# Tudo DESATIVADO (pm disable-user --user 0), nada desinstalado. Para desfazer: restaurar.ps1 (nesta pasta).
+# Conferido após 60 s + sync + 1 reboot: tudo continuou desativado, exceto com.tcl.usercenter, que o
+#   próprio sistema religa a cada boot (igual à unidade brasileira de examples/tcl-40s5400a). Fica ociosa;
+#   não adianta desativar de novo a cada boot.
+# com.tcl.smartalexa (lote 6) também volta a cada boot: quem religa é o com.tcl.ttvs (o atualizador, mantido).
+#   Com a conta Alexa conectada, o TTVS ainda abria o processo dela a cada boot (~80 MB). Em 12/11 a conta foi
+#   desconectada no próprio app da TV (Funciona com Alexa > Sair); depois do reboot ela voltou ativada, mas
+#   parada (nenhum processo), e o launcher esconde o ícone dela (hidden_apps).
+#
+# Já estavam desativados antes (não fazem parte desta lista e continuam assim):
+#   com.google.android.apps.mediashell (Chromecast), au.com.stan.and (Stan), tv.wuaki.apptv (Rakuten TV),
+#   com.google.android.tts (voz do Google)
+# Mantidos por escolha: YouTube, Prime Video, Stremio, controle pelo celular (com.google.android.tv.remote.service),
+#   mídia por USB (com.tcl.ui_mediaCenter, videoplayer, audioplayer, imageplayer), atualizador de firmware (com.tcl.ttvs).
+#   com.tcl.micmanager (microfone da TCL) ficou como estava: não roda (odm.tcl.micmanager.enable=false nesta TV).
+#   Instalados depois pela Play Store (12/11): Twitch e Kick.
+# Não mexer (a TV precisa): com.tcl.tv (TV ao vivo/HDMI), com.tcl.tvinput, com.tcl.tcl_bt_rcu_service,
+#   com.tcl.autopair, com.tcl.system.server, com.tcl.settings, com.tcl.dashboard, com.tcl.suspension,
+#   com.tcl.messagebox, com.tcl.keyhelp, com.tcl.providers.config, com.android.location.fused, teclados,
+#   Play Store e Play Services.
+# Tela inicial: o launcher original com.google.android.tvlauncher é desativado pelo
+#   launcher/build-and-install.sh só depois que o launcher novo (com.gathin.tvhome) vira a Home.
+
+# Lote 1 - conta, telemetria e propaganda (TCL C06 / Android TV 11 / TCL-LA-MT9221-01)
+com.tcl.usercenter                     # conta TCL (o sistema pode religar a cada boot; fica ociosa)
+com.tcl.guard                          # TGuard, limpador/suporte
+com.tcl.partnercustomizer              # linhas promocionais da tela inicial original
+com.tcl.waterfall.overseas             # TCL Channel / portal de vídeos
+com.tcl.esticker                       # adesivo de demonstração de loja
+android.autoinstalls.config.tcl.device # instalação automática de apps parceiros
+com.google.android.feedback            # envio de feedback ao Google
+
+# Lote 2 - extras do Google e serviços em segundo plano
+com.google.android.play.games              # Play Games
+com.google.android.syncadapters.calendar   # sincronização de agenda
+com.google.android.apps.nbu.smartconnect.tv # medidor/economia de dados do Google
+com.google.android.tvrecommendations       # recomendações patrocinadas da tela inicial original
+com.google.android.tungsten.setupwraith    # assistente da 1a configuração (o Wi-Fi salvo é de com.google.uid.shared, não dele)
+
+# Lote 3 - escolhas do dono
+com.netflix.ninja                  # Netflix (pedido do dono)
+com.google.android.youtube.tvmusic # YouTube Music
+com.google.android.videos          # Google TV (filmes)
+com.google.android.katniss         # Google Assistente / busca por voz (botão de microfone)
+com.google.android.backdrop        # protetor de tela com fotos (trocar o protetor ANTES)
+
+# Lote 4 - pedidos do dono depois de ver o launcher novo
+com.tcl.t_solo        # T-Solo ("ouvir sozinho": som da TV só no fone Bluetooth)
+com.tcl.suspension    # Painel rápido da TCL (a engrenagem do controle abre as Configurações do Android, não ele)
+
+# Lote 5 - desempenho (10/11/2026): libera memória em segundo plano
+com.google.android.inputmethod.latin   # Gboard; o teclado em uso é o da TCL (com.tcl.inputmethod.international), que continua
+
+# Lote 6 - pedido do dono (12/11/2026): tirar a Alexa (desconectar a conta antes; ver o cabeçalho)
+com.tcl.smartalexa   # Alexa da TCL (o TTVS religa a cada boot; sem conta fica parada)

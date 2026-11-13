@@ -1,0 +1,4 @@
+# Lote 6 - pedido do dono (12/11/2026): tirar a Alexa
+# Antes, a conta foi desconectada no app Alexa da TV (Funciona com Alexa > Sair). O com.tcl.ttvs religa o
+# pacote a cada boot, mas sem conta ele fica parado; o launcher esconde o ícone (hidden_apps).
+com.tcl.smartalexa   # Alexa da TCL

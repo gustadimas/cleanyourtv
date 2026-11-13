@@ -1,0 +1,6 @@
+# Lote 3 - escolhas do dono
+com.netflix.ninja                  # Netflix (pedido do dono)
+com.google.android.youtube.tvmusic # YouTube Music
+com.google.android.videos          # Google TV (filmes)
+com.google.android.katniss         # Google Assistente / busca por voz (botão de microfone)
+com.google.android.backdrop        # protetor de tela com fotos (trocar o protetor ANTES)

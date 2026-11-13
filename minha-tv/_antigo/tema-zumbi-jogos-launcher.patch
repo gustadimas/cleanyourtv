@@ -1,0 +1,214 @@
+diff --git a/launcher/app/src/main/java/com/gathin/tvhome/MainActivity.java b/launcher/app/src/main/java/com/gathin/tvhome/MainActivity.java
+index 2cc06254..4bcae2b2 100644
+--- a/launcher/app/src/main/java/com/gathin/tvhome/MainActivity.java
++++ b/launcher/app/src/main/java/com/gathin/tvhome/MainActivity.java
+@@ -250,6 +250,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
+     private static int lastFocused = 0;
+     /** App of the last focused tile, so focus follows it when the app list changes. */
+     private static String lastFocusedKey;
++    /** The tile whose focus last picked a focus_wallpapers picture (WallpaperPlayer.focus). */
++    private String wallpaperFocusKey;
+     private float density;
+     /** Module cards (res/values/config.xml, module_cards): discovered on resume, shown only after the owner's Show. */
+     private boolean moduleCards;
+@@ -936,6 +938,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
+         getWindow().getDecorView().getViewTreeObserver().addOnGlobalFocusChangeListener((oldF, newF) -> {
+             boolean onTile = newF != null && newF.getId() == R.id.card;
+             if (!onTile) hideGlass();
++            // focus_wallpapers: the top bar's buttons show the theme's "telhado" pictures.
++            if (newF != null && (newF.getId() == R.id.btnSettings || newF.getId() == R.id.btnWifi
++                    || newF.getId() == R.id.btnInputs)) {
++                wallpaperFocusKey = null;
++                wallpaperPlayer.focusSlot("telhado");
++            }
+         });
+ 
+         packageFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+@@ -1817,6 +1825,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
+             });
+             return;
+         }
++        // focus_wallpapers: a new tile in focus asks the wallpaper for a picture of its slot.
++        String focusKey = adapter.keyAt(position);
++        if (focusKey != null && !focusKey.equals(wallpaperFocusKey)) {
++            wallpaperFocusKey = focusKey;
++            wallpaperPlayer.focus(adapter.packageAt(position), dockRow && (singleRow || position < COLUMNS));
++        }
+         // Tile rect in root coordinates, using layout positions (ignores the scale animation).
+         Rect r = tileRect;
+         r.set(0, 0, card.getWidth(), card.getHeight());
+diff --git a/launcher/app/src/main/java/com/gathin/tvhome/WallpaperPlayer.java b/launcher/app/src/main/java/com/gathin/tvhome/WallpaperPlayer.java
+index 8da8dfa6..8cb5752d 100644
+--- a/launcher/app/src/main/java/com/gathin/tvhome/WallpaperPlayer.java
++++ b/launcher/app/src/main/java/com/gathin/tvhome/WallpaperPlayer.java
+@@ -16,12 +16,19 @@ import android.widget.FrameLayout;
+ import android.widget.ImageView;
+ import android.widget.TextView;
+ 
++import org.json.JSONArray;
++import org.json.JSONObject;
++
+ import java.io.File;
++import java.io.FileInputStream;
++import java.io.InputStream;
++import java.nio.charset.StandardCharsets;
+ import java.time.LocalDate;
+ import java.time.LocalDateTime;
+ import java.time.ZoneId;
+ import java.util.ArrayList;
+ import java.util.Collections;
++import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Random;
+@@ -61,11 +68,21 @@ final class WallpaperPlayer {
+     private final String latitude, longitude;
+     private LocalDate sunDay;
+     private int[] sun;
++    /**
++     * focus_wallpapers in the theme's config.json, as "package=slot" (plus "*dock" and "*grid"): every focus on
++     * Home shows a random collection picture named "<game>-<slot>.<ext>", from a different game than the one on
++     * screen, instead of rotating on a timer. One in twenty picks a "<game>-raro" picture when the theme has one.
++     */
++    private final Map<String, String> focusSlots = new HashMap<>();
++    private final boolean focusMode;
++    /** A slot asked for while a decode was running (or before Home was visible); served when it can be. */
++    private String focusPending;
+ 
+     WallpaperPlayer(Context context, FrameLayout root, Config config) {
+         this.root = root;
+         backgroundColor = config.backgroundColor;
+         files = new ArrayList<>(config.wallpapers);
++        focusMode = readFocusSlots(context, focusSlots) && !files.isEmpty();
+         interval = config.wallpaperRotationMinutes * 60_000L;
+         bitmapConfig = config.wallpaperTrueColor ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+         // The dim is painted into the picture (decode), so no full-screen shade layer is drawn on every frame.
+@@ -130,6 +147,12 @@ final class WallpaperPlayer {
+ 
+     void start() {
+         active = true;
++        if (focusMode && focusPending != null) {
++            String pending = focusPending;
++            focusPending = null;
++            focusSlot(pending);
++            return;
++        }
+         update();
+     }
+ 
+@@ -167,6 +190,8 @@ final class WallpaperPlayer {
+ 
+     void update() {
+         if (!active || closed || loading || files.isEmpty()) return;
++        // focus_wallpapers: the pictures follow the focus; the timer only fills an empty screen.
++        if (focusMode && !displayed.isEmpty()) return;
+         String previous = preferences.getString("image", "");
+         // A picture outside the time of day's group (the group changed) is replaced at once, not after the interval.
+         List<File> playable = playable();
+@@ -203,6 +228,106 @@ final class WallpaperPlayer {
+         });
+     }
+ 
++    /** A focused tile: a dock app's own slot, or the "*dock" / "*grid" slot for the rest. */
++    void focus(String pkg, boolean dock) {
++        if (!focusMode) return;
++        String slot = dock && pkg != null ? focusSlots.get(pkg) : null;
++        if (slot == null) slot = focusSlots.get(dock ? "*dock" : "*grid");
++        if (slot != null) focusSlot(slot);
++    }
++
++    /** Shows a random "<game>-<slot>" picture, cross-fading from the current one. */
++    void focusSlot(String slot) {
++        if (!focusMode || closed) return;
++        if (!active || loading) {
++            focusPending = slot;
++            return;
++        }
++        String wanted = random.nextInt(20) == 0 && hasSlot("raro") ? "raro" : slot;
++        String game = gameOf(displayed);
++        List<File> pool = new ArrayList<>();
++        List<File> sameGame = new ArrayList<>();
++        for (File file : files) {
++            String name = file.getName();
++            if (name.equals(displayed) || !slotOf(name).equals(wanted)) continue;
++            if (gameOf(name).equals(game)) sameGame.add(file); else pool.add(file);
++        }
++        if (pool.isEmpty()) pool = sameGame;
++        if (pool.isEmpty()) return;
++        File next = pool.get(random.nextInt(pool.size()));
++        loading = true;
++        decoder.execute(() -> {
++            Bitmap bitmap = decode(next);
++            root.post(() -> {
++                loading = false;
++                if (closed) {
++                    if (bitmap != null) bitmap.recycle();
++                    return;
++                }
++                if (bitmap != null && active) {
++                    crossfade(bitmap);
++                    displayed = next.getName();
++                    showCaption(true);
++                } else if (bitmap != null) {
++                    bitmap.recycle();
++                }
++                String pending = focusPending;
++                focusPending = null;
++                if (pending != null && active) focusSlot(pending);
++            });
++        });
++    }
++
++    private void crossfade(Bitmap bitmap) {
++        image.animate().cancel();
++        image.animate().alpha(0.25f).setDuration(110).withEndAction(() -> {
++            show(bitmap);
++            image.animate().alpha(1f).setDuration(280).start();
++        }).start();
++    }
++
++    private boolean hasSlot(String slot) {
++        for (File file : files) if (slotOf(file.getName()).equals(slot)) return true;
++        return false;
++    }
++
++    /** "twd-youtube.jpg" -> "twd". */
++    private static String gameOf(String name) {
++        int dash = name.indexOf('-');
++        return dash > 0 ? name.substring(0, dash) : "";
++    }
++
++    /** "twd-youtube.jpg" -> "youtube". */
++    private static String slotOf(String name) {
++        int dash = name.lastIndexOf('-'), dot = name.lastIndexOf('.');
++        return dash >= 0 && dot > dash ? name.substring(dash + 1, dot) : "";
++    }
++
++    /** Reads focus_wallpapers from the theme's config.json (or the launcher's own copy of it). */
++    private static boolean readFocusSlots(Context context, Map<String, String> into) {
++        File[] candidates = {new File(Config.dir(context), Config.FILE_NAME), new File(context.getFilesDir(), Config.FILE_NAME)};
++        for (File file : candidates) {
++            if (file == null || !file.isFile() || file.length() > 64 * 1024) continue;
++            try (InputStream in = new FileInputStream(file)) {
++                byte[] buf = new byte[(int) file.length()];
++                int n = 0, r;
++                while (n < buf.length && (r = in.read(buf, n, buf.length - n)) > 0) n += r;
++                JSONArray list = new JSONObject(new String(buf, 0, n, StandardCharsets.UTF_8)).optJSONArray("focus_wallpapers");
++                if (list == null) return false;
++                for (int i = 0; i < list.length(); i++) {
++                    String entry = list.optString(i, "");
++                    int eq = entry.indexOf('=');
++                    if (eq > 0 && eq < entry.length() - 1) into.put(entry.substring(0, eq).trim(), entry.substring(eq + 1).trim());
++                }
++                return !into.isEmpty();
++            } catch (Exception e) {
++                Log.w("TvHome.Wallpaper", "focus_wallpapers unreadable: " + e.getMessage());
++                return false;
++            }
++        }
++        return false;
++    }
++
+     /**
+      * Small light text under the top-right buttons, above everything else and never focusable. It sits where the
+      * top bar ends in every layout, so it does not cover the clock, the stats line or the tiles.

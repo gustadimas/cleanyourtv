@@ -1,0 +1,12 @@
+## com.kick.mobile camada='com.kick.mobile/com.kick.tv.MainActivity#0'
+abertura TotalTime=1239 ms
+quadros=127 intervalos_em_movimento=119 lentos(>33ms)=6 (5%) p50=17ms p90=17ms p99=67ms max=83ms
+video camada='SurfaceView - com.kick.mobile/com.kick.tv.MainActivity#0': quadros=40 em 1.2s (~32 qps) p50=33ms p99=65ms max=65ms
+PSS: TOTAL PSS:   180543            TOTAL RSS:   251048       TOTAL SWAP PSS:     3222
+MemAvailable: MemAvailable:     338160 kB
+## com.kick.mobile camada='com.kick.mobile/com.kick.tv.MainActivity#0'
+abertura TotalTime=1218 ms
+quadros=127 intervalos_em_movimento=120 lentos(>33ms)=6 (5%) p50=17ms p90=17ms p99=101ms max=117ms
+video camada='SurfaceView - com.kick.mobile/com.kick.tv.MainActivity#0': quadros=42 em 1.2s (~33 qps) p50=33ms p99=50ms max=50ms
+PSS: TOTAL PSS:   175368            TOTAL RSS:   247024       TOTAL SWAP PSS:     2132
+MemAvailable: MemAvailable:     330644 kB

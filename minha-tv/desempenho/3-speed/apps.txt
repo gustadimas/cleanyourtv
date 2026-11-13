@@ -1,0 +1,20 @@
+## com.crunchyroll.crunchyroid (com.crunchyroll.crunchyroid/.splash.ui.SplashActivity)
+/system/bin/sh: can't create /proc/sys/vm/drop_caches: Permission denied
+MemAvailable antes: MemAvailable:     381512 kB
+Status: ok
+LaunchState: COLD
+TotalTime: 2410
+WaitTime: 2427
+Total frames rendered: 28
+Janky frames: 13 (46.43%)
+50th percentile: 15ms
+90th percentile: 44ms
+95th percentile: 48ms
+99th percentile: 48ms
+Number Missed Vsync: 0
+Number High input latency: 15
+Number Slow UI thread: 5
+Number Slow bitmap uploads: 0
+Number Slow issue draw commands: 2
+PSS:            TOTAL PSS:   233809            TOTAL RSS:   287244       TOTAL SWAP PSS:      426
+MemAvailable com o app aberto: MemAvailable:     331256 kB

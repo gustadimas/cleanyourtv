@@ -1,0 +1,181 @@
+## memoria
+MemTotal:         939628 kB
+MemFree:           34800 kB
+MemAvailable:     374520 kB
+Cached:           385744 kB
+SwapCached:         3736 kB
+SwapTotal:        819196 kB
+SwapFree:         607740 kB
+Dirty:                56 kB
+cat: /proc/swaps: Permission denied
+cat: /proc/sys/vm/swappiness: Permission denied
+/sys/block/zram0 disksize=838860800 mm_stat=215740416 35899293 37945344        0 37969920     3547      121      232
+true
+192m
+512m
+## pressao (PSI)
+cpu: 
+memory: 
+io: 
+## cpu
+4
+cpu0 gov=ondemand cur=1350000 max= hwmax=1500000 online=
+cpu1 gov=ondemand cur=1350000 max= hwmax=1500000 online=1
+cpu2 gov=ondemand cur=1350000 max= hwmax=1500000 online=1
+cpu3 gov=ondemand cur=1350000 max= hwmax=1500000 online=1
+## temperatura
+=
+=
+IsStatusOverride: false
+ThermalStatusListeners:
+Thermal Status: 0
+	Temperature{mValue=0.0, mType=6, mName=bcl_voltage, mStatus=0}
+	Temperature{mValue=0.0, mType=7, mName=bcl_current, mStatus=0}
+## animacoes
+0.0
+0.0
+0.0
+## webview
+Current WebView Update Service state
+  Current WebView package (name, version): (com.google.android.webview, 156.0.8078.47)
+  Minimum targetSdkVersion: 30
+  Minimum WebView version code: 443009130
+  WebView package dirty: false
+  Any WebView package installed: true
+  Preferred WebView package (name, version): (com.google.android.webview, 156.0.8078.47)
+  WebView packages:
+    Valid package com.google.android.webview (versionName: 156.0.8078.47, versionCode: 807804700, targetSdkVersion: 36) is  installed/enabled for all users
+## dns
+hostname
+dns.adguard-dns.com
+## dexopt
+  [com.crunchyroll.crunchyroid]
+    path: /data/app/~~aKIIUtn5ZeDUpl43XfSyKw==/com.crunchyroll.crunchyroid-2DQUVGHdzIzR8scCmKECJA==/base.apk
+      arm: [status=speed] [reason=unknown]
+  [com.tcl.keyhelp]
+    path: /product/app/KeyHelp/KeyHelp.apk
+  [com.amazon.amazonvideo.livingroom]
+    path: /data/app/~~hWmWcVVZEXOlGTgoquDiqA==/com.amazon.amazonvideo.livingroom-iQbr4pG0-pfl0MkuIm52MA==/base.apk
+      arm: [status=speed] [reason=unknown]
+  [com.android.providers.settings]
+    path: /system/priv-app/SettingsProvider/SettingsProvider.apk
+  [com.google.android.webview]
+    path: /data/app/~~1lCaLv4bvwjPTi2wiZxJAA==/com.google.android.webview-n1zYg-RbmtSlSOE8ugKJ5Q==/base.apk
+      arm: [status=speed-profile] [reason=install-dm]
+      used by other apps: [com.google.android.backdrop]
+  [com.android.keychain]
+  [com.google.android.youtube.tv]
+    path: /data/app/~~YVEMr2D39_-HJB-xvDkNtg==/com.google.android.youtube.tv-ST74hnfTW0GbrFFvURHvBw==/base.apk
+      arm: [status=speed] [reason=unknown]
+  [com.android.vpndialogs]
+    path: /system/priv-app/VpnDialogs/VpnDialogs.apk
+  [com.stremio.one]
+    path: /data/app/~~E4MOCj3rYj9Jszr-lWcHOw==/com.stremio.one-_ecgeSAJ0Vd1b-9LQz64Vg==/base.apk
+      arm: [status=speed] [reason=unknown]
+  [com.android.providers.contacts]
+    path: /system/priv-app/ContactsProvider/ContactsProvider.apk
+## versoes
+Failed to write while dumping service package: Broken pipe
+Failed to write while dumping service package: Broken pipe
+com.amazon.amazonvideo.livingroom versionName=6.24.13+v16.0.1.93-allAbis lastUpdateTime=2026-10-2902:56:50
+com.crunchyroll.crunchyroid versionName=3.81.0 lastUpdateTime=2026-11-1001:23:55
+Failed to write while dumping service package: Broken pipe
+Failed to write while dumping service package: Broken pipe
+com.google.android.youtube.tv versionName=5.30.340 lastUpdateTime=2026-10-2505:22:57
+com.stremio.one versionName=1.12.1 lastUpdateTime=2026-11-0306:30:54
+Failed to write while dumping service package: Broken pipe
+com.google.android.webview versionName=156.0.8078.47 lastUpdateTime=2026-10-2708:24:17
+com.android.vending versionName=53.4.19-24[8][PR]1013339528 lastUpdateTime=2026-11-0619:34:00
+Failed to write while dumping service package: Broken pipe
+Failed to write while dumping service package: Broken pipe
+com.google.android.gms versionName=26.43.30(180300-1006944126) lastUpdateTime=2026-11-0301:27:25
+## top
+ Swap:   819196K total,   211200K used,   607996K free,   388736K cached
+400%cpu   9%user   0%nice  29%sys 362%idle   0%iow   0%irq   0%sirq   0%host
+   PID USER         %CPU  %MEM  RES[NAME]
+   272 root          0.0   9.0  83M zygote
+  1062 wifi          0.0   0.3 3.1M wpa_supplicant
+   477 wifi          0.0   0.4 3.7M wificond
+  1091 webview_zygote 0.0  4.1  38M webview_zygote
+   182 root          0.0   0.4 4.0M vold
+   175 system        0.0   0.2 2.3M vndservicemanager
+   361 system        0.0   0.2 2.1M vendor.tcl.input@1.0-service
+   360 root          0.0   0.5 5.2M vendor.mediatek.tv.mtktvfactory@1.0-service
+   359 system        0.0   0.2 2.1M vendor.mediatek.tv.mtkrm@1.0-service
+   358 system        0.0   0.2 2.1M vendor.mediatek.tv.mtkmtalservice@1.0-service
+   357 system        0.0   0.2 2.2M vendor.mediatek.tv.mtkdmservice@1.0-service
+   356 system        0.0   0.2 2.2M vendor.mediatek.tv.cmpb@1.0-service
+   355 system        0.0   0.2 2.2M vendor.mediatek.hardware.tv.networkproxy@1.0-service
+   354 system        0.0   0.3 3.3M vendor.mediatek.graphics.externalbuffer@1.0-service
+   353 system        0.0   0.2 2.2M vendor.ipel.engine@1.0-service
+## cpuinfo
+Load: 17.98 / 4.19 / 1.38
+CPU usage from 112748ms to 107665ms ago (2026-11-10 14:36:52.217 to 2026-11-10 14:36:57.299):
+  61% 731/system_server: 40% user + 20% kernel / faults: 18704 minor 178 major
+  33% 1382/com.tcl.ttvs: 30% user + 2.9% kernel / faults: 4761 minor 32 major
+  14% 367/surfaceflinger: 7.7% user + 6.7% kernel / faults: 286 minor 18 major
+  12% 59/kswapd0: 0% user + 12% kernel
+  6.9% 484/installd: 2.5% user + 4.3% kernel / faults: 78 minor
+  6.9% 1442/com.google.android.gms: 4.3% user + 2.5% kernel / faults: 3286 minor 282 major
+  6.1% 516/sitatvservice: 1.5% user + 4.5% kernel / faults: 313 minor 8 major
+  6.1% 730/bootanimation: 2.5% user + 3.5% kernel / faults: 89 minor
+  5.9% 339/android.hardware.graphics.composer@2.4-service: 1.7% user + 4.1% kernel / faults: 990 minor 4 major
+  5.1% 496/media.swcodec: 2.3% user + 2.7% kernel / faults: 614 minor 6 major
+  4.9% 24/kworker/2:0H-mmc_complete: 0% user + 4.9% kernel
+  4.3% 171/logd: 2.3% user + 1.9% kernel / faults: 197 minor 23 major
+  4.1% 994/com.android.systemui: 2.1% user + 1.9% kernel / faults: 4572 minor 36 major
+  3.3% 172/lmkd: 0.3% user + 2.9% kernel
+  3.3% 971/RTW_CMD_THREAD: 0% user + 3.3% kernel
+  2.5% 503/ld-linux.so.3: 0.3% user + 2.1% kernel
+  2.3% 486/media.extractor: 0.7% user + 1.5% kernel / faults: 2089 minor 5 major
+  1.7% 271/netd: 0.7% user + 0.9% kernel / faults: 292 minor 1 major
+  1.5% 154/kworker/3:2H-mmc_complete: 0% user + 1.5% kernel
+  1.5% 246/kworker/u9:2-mali_jd: 0% user + 1.5% kernel
+## meminfo
+Total PSS by process:
+     66,611K: system (pid 731)
+     60,609K: com.google.android.gms (pid 1442)
+     51,806K: com.android.vending (pid 2285)
+     38,708K: com.google.android.gms.unstable (pid 2230)
+     37,445K: com.android.vending:background (pid 2798)
+     33,350K: com.gathin.tvhome (pid 1696 / activities)
+     30,937K: ginga_service (pid 471)
+     23,918K: com.tcl.ttvs (pid 1382)
+     22,119K: com.tcl.tv (pid 2373)
+     20,924K: com.tcl.ttvs.core (pid 2414)
+     16,003K: com.android.systemui (pid 994)
+     13,570K: surfaceflinger (pid 367)
+     12,358K: sitatvservice (pid 516)
+     11,093K: com.android.tv.settings (pid 1204)
+     10,374K: com.android.providers.media.module (pid 1675)
+      9,801K: com.google.android.permissioncontroller (pid 2341)
+      9,465K: com.tcl.smartalexa (pid 2504)
+      8,476K: com.google.android.tv.remote.service (pid 1346)
+      8,299K: com.android.bluetooth (pid 1586)
+      7,989K: android.hardware.graphics.composer@2.4-service (pid 339)
+      7,529K: com.tcl.tvinput (pid 1068)
+      7,450K: com.tcl.inputmethod.international (pid 1649)
+      7,164K: com.google.android.ext.services (pid 1278)
+## mortes por falta de memoria (desde o boot)
+16
+11-10 14:37:45.780   731  1569 I am_kill : [0,2809,com.google.android.onetimeinitializer,985,empty #9]
+11-10 14:37:47.293   731   952 I am_kill : [0,2480,android.process.acore,995,empty #9]
+11-10 14:37:54.333   731   753 I am_kill : [0,2108,com.android.providers.calendar,995,empty #9]
+11-10 14:38:00.658   731  1569 I am_kill : [0,2908,com.google.android.packageinstaller,995,empty #9]
+11-10 14:38:12.955   731  1569 I am_kill : [0,2970,com.android.externalstorage,100,empty #9]
+11-10 14:38:13.535   731   829 I am_kill : [0,3202,com.amazon.amazonvideo.livingroom,905,Memory Shrinker]
+11-10 14:38:43.926   731  1569 I am_kill : [0,3087,com.google.android.youtube.tv,945,empty #9]
+11-10 14:38:45.287   731   829 I am_kill : [0,3390,com.amazon.amazonvideo.livingroom,915,Memory Shrinker]
+11-10 14:38:24.765   172   172 E lowmemorykiller: Failed to get free memory!
+11-10 14:38:24.775   172   172 E lowmemorykiller: /proc/zoneinfo parse error
+11-10 14:38:24.775   172   172 E lowmemorykiller: Failed to get free memory!
+11-10 14:38:24.787   172   172 E lowmemorykiller: /proc/zoneinfo parse error
+11-10 14:38:24.787   172   172 E lowmemorykiller: Failed to get free memory!
+149.74 325.01
+## armazenamento
+/dev/block/dm-12 3.4G  1.9G  1.4G  59% /data/user/0
+    level=NORMAL lastUsableBytes=1527623680 
+    lowBytes=524288000 fullBytes=131072000
+## ime
+com.tcl.inputmethod.international/.T_IME
+u0_a73         1649    272 1265344  73016 0                   0 S com.tcl.inputmethod.international
